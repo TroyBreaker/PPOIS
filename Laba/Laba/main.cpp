@@ -1,204 +1,98 @@
-//#include <iostream>
-//using namespace std;
-//
-//int NOD(int a, int b)
-//{
-//	if (b % a == 0)
-//		return a;
-//	else return NOD(b % a, a);
-//}
-//
-//int NOK(int n1, int n2)
-//{
-//	return n1 * n2 / NOD(n1, n2);
-//}
-//class Fraction;
-//void Check(Fraction&);
-//
-//class Fraction {
-//private:
-//	int integer;
-//	int num;
-//	int denom;
-//public:
-//	Fraction(int integer, int num, int denom)
-//	{
-//		if (denom < 0 || num < 0)
-//		{
-//			cout << "Числитель и знаменатель взяты по модулю." << endl;
-//			num = fabs(num);
-//			denom = fabs(denom);
-//		}
-//		if (denom == 0)
-//		{
-//			cout << "Знаменатель не может быть равен нулю! Знаменатель заменён на 1." << endl;
-//			denom = 1;
-//		}
-//
-//		if (num != 0)
-//		{
-//			int nod = NOD(num, denom);
-//			num /= nod;
-//			denom /= nod;
-//		}
-//		if (num >= denom)
-//		{
-//			int extra_int = num / denom;
-//			integer += extra_int;
-//			num = num - extra_int * denom;
-//		}
-//		this->integer = integer;
-//		this->num = num;
-//		this->denom = denom;
-//	}
-//
-//	Fraction()
-//	{}
-//
-//	void Print()
-//	{
-//		cout << "Дробь " << this << " " << integer << " " << num << "/" << denom << endl;
-//	}
-//
-//	int GetInt()
-//	{
-//		return integer;
-//	}
-//	int GetNum()
-//	{
-//		return num;
-//	}
-//	int GetDenom()
-//	{
-//		return denom;
-//	}
-//	void SetInt(int integer)
-//	{
-//		this->integer = integer;
-//	}
-//	void SetNum(int num)
-//	{
-//		this->num = num;
-//	}
-//	void SetDenom(int denom)
-//	{
-//		this->denom = denom;
-//	}
-//
-//	void operator =(const Fraction& other)
-//	{
-//		this->denom = other.denom;
-//		this->num = other.num;
-//		this->integer = other.integer;
-//	}
-//
-//	Fraction operator+(int digit)
-//	{
-//		Fraction temp;
-//		temp.integer = this->integer + digit;
-//		temp.denom = this->denom;
-//		temp.num = this->num;
-//		return temp;
-//	}
-//
-//	void operator +=(int digit)
-//	{
-//		Fraction temp;
-//		temp.integer = this->integer + digit;
-//		temp.denom = this->denom;
-//		temp.num = this->num;
-//		*this = temp;
-//	}
-//
-//	Fraction operator +(Fraction& other)
-//	{
-//		Fraction temp;
-//		int nok = NOK(this->denom, other.denom);
-//		int firstQuo = nok / this->denom;
-//		int secQuo = nok / other.denom;
-//		this->num *= firstQuo;
-//		this->denom *= firstQuo;
-//		other.num *= secQuo;
-//		other.denom *= secQuo;
-//		temp.integer = this->integer + other.integer;
-//		temp.num = this->num + other.num;
-//		temp.denom = this->denom;
-//		Check(*this);
-//		Check(other);
-//		Check(temp);
-//		return temp;
-//	}
-//
-//	void operator +=(Fraction& other)
-//	{
-//		Fraction temp;
-//		int nok = NOK(this->denom, other.denom);
-//		int firstQuo = nok / this->denom;
-//		int secQuo = nok / other.denom;
-//		this->num *= firstQuo;
-//		this->denom *= firstQuo;
-//		other.num *= secQuo;
-//		other.denom *= secQuo;
-//		temp.integer = this->integer + other.integer;
-//		temp.num = this->num + other.num;
-//		temp.denom = this->denom;
-//		Check(*this);
-//		Check(other);
-//		Check(temp);
-//		*this= temp;
-//		// cout << &temp.denom << " " << &(this->denom) << endl;
-//	}
-//
-//	Fraction operator -(Fraction& other)
-//	{
-//		Fraction temp;
-//		int nok = NOK(this->denom, other.denom);
-//		int firstQuo = nok / this->denom;
-//		int secQuo = nok / other.denom;
-//		this->num *= firstQuo;
-//		this->denom *= firstQuo;
-//		other.num *= secQuo;
-//		other.denom *= secQuo;
-//		temp.integer = this->integer - other.integer;
-//		temp.num = this->num - other.num;
-//		temp.denom = this->denom;
-//		Check(*this);
-//		Check(other);
-//		Check(temp);
-//		return temp;
-//	}
-//};
-//
-//void Check(Fraction& frac)
-//{
-//	int num = frac.GetNum();
-//	int denom = frac.GetDenom();
-//	int integer = frac.GetInt();
-//	if (num != 0)
-//	{
-//		int nod = NOD(num, denom);
-//		num /= nod;
-//		denom /= nod;
-//	}
-//	if (num >= denom)
-//	{
-//		int extra_int = num / denom;
-//		integer += extra_int;
-//		num = num - extra_int * denom;
-//	}
-//	frac.SetDenom(denom);
-//	frac.SetInt(integer);
-//	frac.SetNum(num);
-//}
-//
-//int main()
-//{
-//	setlocale(LC_ALL, "ru");
-//	Fraction first(0, 5, 7);
-//	Fraction sec(8, 3, 8);
-//	Fraction c;
-//	c = sec + first;
-//	first.Print();
-//	sec.Print();
-//	c.Print();
-//}
+//#include <cstdlib>
+#include "Haeder.h"
+#include <iostream>
+#include <gtest/gtest.h>
+
+TEST(SimpleCount, test1)
+{
+	Fraction first(5, -15);
+	Fraction sec(0, 0);
+	Fraction third(-58, 13);
+	EXPECT_EQ(third.GetInt(), -4);
+	Fraction fourth;
+	fourth = sec + first;
+	EXPECT_EQ(fourth.GetNum(), 1);
+	bool isBigger = first > sec;
+	EXPECT_TRUE(isBigger);
+	isBigger = first > -5;
+	EXPECT_TRUE(isBigger);
+	double a = fourth.Convert();
+	EXPECT_EQ(a, 1 / 3.);
+	Fraction fifth = first + 7;
+	a = fifth.Convert();
+	EXPECT_EQ(a,22/3.);
+}
+
+TEST(SimpleCount, test2)
+{
+	Fraction first(-4, 9);
+	Fraction sec(4, 9);
+	bool isLess = first < sec;
+	EXPECT_TRUE(isLess);
+	isLess = sec < 4;
+	EXPECT_TRUE(isLess);
+	Fraction third;
+	first += sec;
+	double a = first.Convert();
+	EXPECT_EQ(a, 0);
+	first.SetNum(41);
+	first.SetDenom(8);
+	third = sec - first;
+	a = third.Convert();
+	EXPECT_EQ(a, -337. / 72);
+	third = sec - 5;
+	a = third.Convert();
+	EXPECT_EQ(a, -41. / 9);
+}
+
+TEST(SimpleCount, test3)
+{
+	Fraction first(2, 3);
+	Fraction sec(8, 16);
+	bool isBigger = first >= sec;
+	EXPECT_TRUE(isBigger);
+	isBigger = first >= -5;
+	EXPECT_TRUE(isBigger);
+	first += sec;
+	double a = first.Convert();
+	EXPECT_EQ(a, 7./6);
+	sec += 2;
+	a = sec.Convert();
+	EXPECT_EQ(a, 2.5);
+}
+
+TEST(SimpleCount, test4)
+{
+	Fraction first(2, 3);
+	Fraction sec(8, 16);
+	bool isLess = sec <= first;
+	EXPECT_TRUE(isLess);
+	isLess = first <= 5;
+	EXPECT_TRUE(isLess);
+	first -= sec;
+	double a = first.Convert();
+	EXPECT_EQ(a, 1. / 6);
+	sec -= 2;
+	a = sec.Convert();
+	EXPECT_EQ(a, -1.5);
+}
+
+TEST(SimpleCount, test5)
+{
+	Fraction first(0, 8);
+	Fraction sec(6, 21);
+	Fraction third;
+	third = sec * 0;
+	double a = third.Convert();
+	EXPECT_EQ(a, 0);
+	/*third = sec * -3;
+	a = third.Convert();
+	EXPECT_EQ(a, -6. / 7);*/
+}
+
+int main(int argc, char* argv[])
+{
+	testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
+	
+}

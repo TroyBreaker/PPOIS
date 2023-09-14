@@ -1,2 +1,7 @@
-﻿  Source.cpp
-  Laba.vcxproj -> D:\OLEG\ПОИИС\Sem_1\Lab_1\Laba\x64\Debug\Laba.exe
+﻿  Haeder.cpp
+  main.cpp
+  Generating Code...
+D:\OLEG\ПОИИС\Sem_1\PPOIS\Laba\Laba\Haeder.h(141): warning C4172: returning address of local variable or temporary: temp
+D:\OLEG\ПОИИС\Sem_1\PPOIS\Laba\Laba\Haeder.h(108): warning C4172: returning address of local variable or temporary: temp
+D:\OLEG\ПОИИС\Sem_1\PPOIS\Laba\Laba\Haeder.h(206): warning C4172: returning address of local variable or temporary: temp
+  Laba.vcxproj -> D:\OLEG\ПОИИС\Sem_1\PPOIS\Laba\x64\Debug\Laba.exe
