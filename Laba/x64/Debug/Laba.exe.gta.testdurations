@@ -17,5 +17,6 @@
     <TestDuration Test="SimpleCount.test13" Duration="1" />
     <TestDuration Test="SimpleCount.test14" Duration="1" />
     <TestDuration Test="SimpleCount.test515" Duration="1" />
+    <TestDuration Test="SimpleCount.test15" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

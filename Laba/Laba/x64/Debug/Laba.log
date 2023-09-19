@@ -1,7 +1,9 @@
-﻿  Test.cpp
+﻿  main.cpp
+  Test.cpp
+  Создание кода...
 D:\OLEG\ПОИИС\Sem_1\PPOIS\Laba\Laba\Haeder.h(141): warning C4172: возвращение адреса локальной или временной переменной : temp
-D:\OLEG\ПОИИС\Sem_1\PPOIS\Laba\Laba\Haeder.h(255): warning C4172: возвращение адреса локальной или временной переменной : temp
 D:\OLEG\ПОИИС\Sem_1\PPOIS\Laba\Laba\Haeder.h(108): warning C4172: возвращение адреса локальной или временной переменной : temp
+D:\OLEG\ПОИИС\Sem_1\PPOIS\Laba\Laba\Haeder.h(255): warning C4172: возвращение адреса локальной или временной переменной : temp
 D:\OLEG\ПОИИС\Sem_1\PPOIS\Laba\Laba\Haeder.h(305): warning C4172: возвращение адреса локальной или временной переменной : temp
 D:\OLEG\ПОИИС\Sem_1\PPOIS\Laba\Laba\Haeder.h(291): warning C4172: возвращение адреса локальной или временной переменной : temp
 D:\OLEG\ПОИИС\Sem_1\PPOIS\Laba\Laba\Haeder.h(206): warning C4172: возвращение адреса локальной или временной переменной : temp

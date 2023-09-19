@@ -220,7 +220,7 @@ TEST(SimpleCount, test14)
 	EXPECT_EQ(a, 0);
 }
 
-TEST(SimpleCount, test515)
+TEST(SimpleCount, test15)
 {
 	Fraction first(0, 8);
 	Fraction sec(0, 8);
