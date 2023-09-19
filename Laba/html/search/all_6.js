@@ -11,9 +11,11 @@ var searchData=
   ['get_3c_207_20_3e_8',['Get&lt; 7 &gt;',['../classstd_1_1tr1_1_1gtest__internal_1_1_get_3_017_01_4.html',1,'std::tr1::gtest_internal']]],
   ['get_3c_208_20_3e_9',['Get&lt; 8 &gt;',['../classstd_1_1tr1_1_1gtest__internal_1_1_get_3_018_01_4.html',1,'std::tr1::gtest_internal']]],
   ['get_3c_209_20_3e_10',['Get&lt; 9 &gt;',['../classstd_1_1tr1_1_1gtest__internal_1_1_get_3_019_01_4.html',1,'std::tr1::gtest_internal']]],
-  ['gtest_20h_20tt_11',['Header &lt;tt&gt;gtest.h&lt;/tt&gt;',['../md_packages_2_microsoft_8googletest_8v140_8windesktop_8msvcstl_8static_8rt-dyn_81_88_81_87_2build32ff9ed2ab46485244cc9248e60fdb8.html#autotoc_md1',1,'']]],
-  ['gtest_20port_20h_20tt_12',['Header &lt;tt&gt;gtest-port.h&lt;/tt&gt;',['../md_packages_2_microsoft_8googletest_8v140_8windesktop_8msvcstl_8static_8rt-dyn_81_88_81_87_2build32ff9ed2ab46485244cc9248e60fdb8.html#autotoc_md3',1,'']]],
-  ['gtest_20printers_20h_20tt_13',['Header &lt;tt&gt;gtest-printers.h&lt;/tt&gt;',['../md_packages_2_microsoft_8googletest_8v140_8windesktop_8msvcstl_8static_8rt-dyn_81_88_81_87_2build32ff9ed2ab46485244cc9248e60fdb8.html#autotoc_md9',1,'']]],
-  ['gtestlog_14',['GTestLog',['../classtesting_1_1internal_1_1_g_test_log.html',1,'testing::internal']]],
-  ['gtestmutexlock_15',['GTestMutexLock',['../classtesting_1_1internal_1_1_g_test_mutex_lock.html',1,'testing::internal']]]
+  ['getdenom_11',['GetDenom',['../class_fraction.html#ae46a3f0beb5ceae7b93e204d841db16b',1,'Fraction']]],
+  ['getnum_12',['GetNum',['../class_fraction.html#a02b7463fa4e0b2ac5ffba2af0cb024b6',1,'Fraction']]],
+  ['gtest_20h_20tt_13',['Header &lt;tt&gt;gtest.h&lt;/tt&gt;',['../md_packages_2_microsoft_8googletest_8v140_8windesktop_8msvcstl_8static_8rt-dyn_81_88_81_87_2build32ff9ed2ab46485244cc9248e60fdb8.html#autotoc_md1',1,'']]],
+  ['gtest_20port_20h_20tt_14',['Header &lt;tt&gt;gtest-port.h&lt;/tt&gt;',['../md_packages_2_microsoft_8googletest_8v140_8windesktop_8msvcstl_8static_8rt-dyn_81_88_81_87_2build32ff9ed2ab46485244cc9248e60fdb8.html#autotoc_md3',1,'']]],
+  ['gtest_20printers_20h_20tt_15',['Header &lt;tt&gt;gtest-printers.h&lt;/tt&gt;',['../md_packages_2_microsoft_8googletest_8v140_8windesktop_8msvcstl_8static_8rt-dyn_81_88_81_87_2build32ff9ed2ab46485244cc9248e60fdb8.html#autotoc_md9',1,'']]],
+  ['gtestlog_16',['GTestLog',['../classtesting_1_1internal_1_1_g_test_log.html',1,'testing::internal']]],
+  ['gtestmutexlock_17',['GTestMutexLock',['../classtesting_1_1internal_1_1_g_test_mutex_lock.html',1,'testing::internal']]]
 ];

@@ -14,6 +14,7 @@ int NOK(int n1, int n2)
 
 void Fraction::Check(Fraction& frac)
 {
+
 	int num = frac.GetNum();
 	int denom = frac.GetDenom();
 	if (num != 0)

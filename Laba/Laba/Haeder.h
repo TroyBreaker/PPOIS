@@ -4,12 +4,12 @@ using namespace std;
 int NOD(int a, int b);
 int NOK(int a, int b);
 //class Fraction;
-
 /**
 * @brief Class of Fraction with sign
 */
 
 class Fraction {
+
 	//! Numenator
 	int num;
 	//! Denominator
@@ -232,9 +232,13 @@ public:
 	* @param The object from which fields are assigned
 	* @return Quotient
 	*/
-	Fraction& operator/(const Fraction& other)
+	Fraction& operator/(Fraction& other)
 	{
 		Fraction temp;
+		if (other.num == 0)
+		{
+			other.num=1;
+		}
 		temp.num = this->num * other.denom;
 		temp.denom = this->denom * other.num;
 		if (other.num < 0 && this->num < 0)

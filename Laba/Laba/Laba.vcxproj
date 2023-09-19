@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Haeder.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Haeder.h" />
