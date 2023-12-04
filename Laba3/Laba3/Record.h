@@ -5,13 +5,11 @@ using namespace std;
 * @brief Class of Record (base class)
 */
 class Record {
+	//! length of record
 	double length;
+	//! name of record
 	string name;
 public:
-	double GetLength()
-	{
-		return length;
-	}
 	string GetName()
 	{
 		return name;

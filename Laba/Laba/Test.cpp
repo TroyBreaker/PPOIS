@@ -25,6 +25,7 @@ TEST(SimpleCount, test1)
 	Fraction fifth = first + 7;
 	a = fifth.Convert();
 	EXPECT_EQ(a, 22 / 3.);
+	NOK(1, 5);
 }
 
 TEST(SimpleCount, test2)

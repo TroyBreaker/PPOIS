@@ -2,6 +2,6 @@
 <GtaTestDurations xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Executable>D:\OLEG\2_Course\ПОИИС\PPOIS\Laba3\x64\Debug\Laba3.exe</Executable>
   <TestDurations>
-    <TestDuration Test="TestCaseName.TestName" Duration="1" />
+    <TestDuration Test="TestCaseName.TestName" Duration="2" />
   </TestDurations>
 </GtaTestDurations>

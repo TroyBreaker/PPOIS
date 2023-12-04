@@ -3,7 +3,9 @@
 * @brief Class of Settings for Application
 */
 class Settings {
+	//! current value of volume
 	int volume=30;
+	//! keep 0 if volume not turned off, keep value of volume if volume turned off
 	int MuteVolume=0;
 public:
 	void IncrVolume(int val) {

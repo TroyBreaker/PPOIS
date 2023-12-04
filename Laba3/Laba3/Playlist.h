@@ -10,21 +10,13 @@ using namespace std;
 * @brief Class of Playlist for Application
 */
 class Playlist {
+	//! vector of musics in playlist
 	vector<Music*> musics;
+	//! vector of podcasts in playlist
 	vector<Podcast*> podcasts;
+	//! vector of bands in playlist
 	vector<Band*> ListOfBands;
 public:
-	Playlist(vector<Music*> vector_music,vector<Podcast*> vector_podcast)
-	{
-		for (int i = 0; i < vector_music.size(); i++)
-		{
-			this->musics[i] = vector_music[i];
-		}
-		for (int i = 0; i < vector_podcast.size(); i++)
-		{
-			this->podcasts[i] = vector_podcast[i];
-		}
-	}
 	Playlist() {}
 
 	void AddMus(Music* rec)

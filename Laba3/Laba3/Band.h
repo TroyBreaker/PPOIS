@@ -4,7 +4,9 @@
 * @brief Class of Band for Application and Playlist
 */
 class Band {
+	//! albums of band
 	vector<Album*> albums;
+	//! name of band
 	string name;
 public:
 	Band(string name) {

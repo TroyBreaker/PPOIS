@@ -6,13 +6,21 @@ using namespace std;
 * @brief Class of Application
 */
 class Application {
+	//! name of application
 	string name;
+	//! state of application, 0-turn off, 1-turn on
 	bool state = 0;
+	//! current record, record that you listen now
 	Record* current = NULL;
+	//! your playlist
 	Playlist* playlist;
+	//! setting of application
 	Settings* settings;
+	//! vector of all musics you can listen
 	vector<Music*> ListOfMusic;
+	//! vector of all podcasts you can listen
 	vector<Podcast*> ListOfPodcast;
+	//! vector of all bands you can listen
 	vector<Band*> ListOfBands;
 public:
 	Application(string name, Playlist* playlist, Settings* settings)

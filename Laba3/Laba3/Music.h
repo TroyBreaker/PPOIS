@@ -6,6 +6,8 @@
 */
 class Music : public Record
 {
+
+	//! genre of music
 	string genre;
 public:
 	Music(string genre, double length, string name) : Record(length, name)

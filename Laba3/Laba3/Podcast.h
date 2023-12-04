@@ -5,7 +5,9 @@
 */
 class Podcast :public Record
 {
+	//! name of talker
 	string talker;
+	//! theme of podcast
 	string theme;
 public:
 	Podcast(string talker, string theme, double length, string name) :Record(length, name)

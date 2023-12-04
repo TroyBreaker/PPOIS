@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 #include <gtest/gtest.h>
-#include"Application.h"
+//#include"Application.h"
 #include "Foo.h"
 
 TEST(TestCaseName, TestName) {
@@ -94,7 +94,10 @@ TEST(TestCaseName, TestName) {
         AllPodcasts.push_back(podc);
     }
     app->SetListOfPodcast(AllPodcasts);
-
+    string line;
+    AllPodcasts[0]->GetInfo(line);
+    line = "";
+    AllMusics[0]->GetInfo(line);
 
     vector<Album*>albums;
     for (int i = 0; i < 8;)

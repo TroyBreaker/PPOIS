@@ -4,14 +4,11 @@ class Music;
 * @brief Class of Album for Band
 */
 class Album {
+	//! songs in album
 	vector<Music*> songs;
+	//! name of album
 	string name;
 public:
-	Album(string name, vector<Music*> songs) {
-		this->name = name;
-		for (int i = 0; i < songs.size(); i++)
-			this->songs.push_back(songs[i]);
-	}
 	Album(string name)
 	{
 		this->name = name;
