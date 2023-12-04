@@ -27,15 +27,16 @@ Laba2/Laba2/Laba2.vcxproj.filters
 Laba2/Laba2/Laba2.vcxproj.user
 Laba2/Laba2/packages.config
 
+
 Laba3/.vs
 Laba3/html
 Laba3/packages
 Laba3/TestResults
 Laba3/x64
-Laba3/Laba.sln
+Laba3/Laba3.sln
 Laba3/Laba3/html
 Laba3/Laba3/x64
-Laba3/Laba2/Laba3.vcxproj
-Laba3/Laba2/Laba3.vcxproj.filters
-Laba3/Laba2/Laba3.vcxproj.user
-Laba3/Laba2/packages.config
+Laba3/Laba3/Laba3.vcxproj
+Laba3/Laba3/Laba3.vcxproj.filters
+Laba3/Laba3/Laba3.vcxproj.user
+Laba3/Laba3/packages.config
