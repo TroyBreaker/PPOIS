@@ -1,8 +1,8 @@
 #include "Deanery.h"
 
-int Group::GetNumber_of_group()
+int Group::GetNumberOfGroup()
 {
-	return Number_of_group;
+	return NumberOfGroup;
 }
 
 int Group::GetNumberOfStuds()
@@ -16,7 +16,7 @@ Group::Group(int NumberOfStuds, int course, int Number_of_group, Student* studen
 		this->students[i] = students[i];
 	this->NumberOfStuds = NumberOfStuds;
 	this->course = course;
-	this->Number_of_group = Number_of_group;
+	this->NumberOfGroup = Number_of_group;
 	this->schedule = schedule;
 }
 
@@ -54,7 +54,7 @@ Group* Deanery::GetGroup(int NumberOfGroup)
 {
 	for (int i = 0; i < NumberOfGrs; i++)
 	{
-		if (groups[i]->GetNumber_of_group() == NumberOfGroup)
+		if (groups[i]->GetNumberOfGroup() == NumberOfGroup)
 			return groups[i];
 	}
 }
@@ -150,7 +150,7 @@ void Deanery::Transfer(string name, int NumOfCurGr, int NumOfWantedGr)
 {
 	for (int cur = 0; cur < NumberOfGrs; cur++)
 
-		if (NumOfCurGr == groups[cur]->GetNumber_of_group())
+		if (NumOfCurGr == groups[cur]->GetNumberOfGroup())
 
 			for (int NumOfStud = 0; NumOfStud < groups[cur]->GetNumberOfStuds(); NumOfStud++)
 
@@ -158,7 +158,7 @@ void Deanery::Transfer(string name, int NumOfCurGr, int NumOfWantedGr)
 
 					for (int want = 0; want < NumOfWantedGr; want++)
 
-						if (NumOfWantedGr == groups[want]->GetNumber_of_group())
+						if (NumOfWantedGr == groups[want]->GetNumberOfGroup())
 						{
 							groups[want]->SetStud(groups[cur]->GetStud(NumOfStud));
 							groups[cur]->DelStud(NumOfStud);
@@ -214,7 +214,7 @@ void Deanery::Signature(int NumOfGr)
 {
 	for (int c = 0; c < NumOfGr; c++)
 	{
-		if (NumOfGr == groups[c]->GetNumber_of_group())
+		if (NumOfGr == groups[c]->GetNumberOfGroup())
 		{
 			for (int j = 0; j < groups[c]->GetNumberOfStuds(); j++)
 			{
@@ -243,7 +243,7 @@ void  Deanery::DeaneryCheck(int Group, bool approveFromDeckan)
 	deckan->SetApproval(approveFromDeckan);
 	if (deckan->GetApprovalFromDeckan8())
 		for (int i = 0; i < NumberOfGrs; i++)
-			if (Group == groups[i]->GetNumber_of_group())
+			if (Group == groups[i]->GetNumberOfGroup())
 				for (int j = 0; j < groups[i]->GetNumberOfStuds(); j++)
 				{
 					int BadMarks = 0;
@@ -264,7 +264,7 @@ void  Deanery::DeaneryCheck(int Group, bool approveFromDeckan)
 void Deanery::GiveDorm(int Group)
 {
 	for (int i = 0; i < NumberOfGrs; i++)
-		if (Group == groups[i]->GetNumber_of_group())
+		if (Group == groups[i]->GetNumberOfGroup())
 			for (int j = 0; j < groups[i]->GetNumberOfStuds(); j++)
 				if (groups[i]->GetStud(j)->GetBenefit() == 1)
 					groups[i]->GetStud(j)->SetDorm(1); 
@@ -306,7 +306,7 @@ void Deanery::GiveScholarship(string name, int NumberOfGroup)
 {
 	for (int i = 0; i < NumberOfGrs; i++)
 
-		if (NumberOfGroup == groups[i]->GetNumber_of_group())
+		if (NumberOfGroup == groups[i]->GetNumberOfGroup())
 
 			for (int NumOfStud = 0; NumOfStud < groups[i]->GetNumberOfStuds(); NumOfStud++)
 
@@ -340,7 +340,7 @@ void Deanery::TransferBudget(int Group, bool approveFromDeckan)
 	deckan->SetApproval(approveFromDeckan);
 	if (deckan->GetApprovalFromDeckan8())
 		for (int i = 0; i < NumberOfGrs; i++)
-			if (Group == groups[i]->GetNumber_of_group())
+			if (Group == groups[i]->GetNumberOfGroup())
 				for (int j = 0; j < groups[i]->GetNumberOfStuds(); j++)
 				{
 					int Average = 0;
@@ -371,7 +371,7 @@ void Deanery::TeacherDegree(Teacher* tch, bool approveFromDeckan, string NewDegr
 void Deanery::SetScheduleForGroup(int schedule[], int Group)
 {
 	for (int i = 0; i < NumberOfGrs; i++)
-		if (Group == groups[i]->GetNumber_of_group())
+		if (Group == groups[i]->GetNumberOfGroup())
 			groups[i]->GetSchedule()->SetSchedule(schedule);
 }
 /**

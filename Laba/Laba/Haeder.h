@@ -9,7 +9,6 @@ int NOK(int a, int b);
 */
 
 class Fraction {
-
 	//! Numenator
 	int num;
 	//! Denominator

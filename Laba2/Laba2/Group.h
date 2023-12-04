@@ -7,14 +7,14 @@
 class Group
 {
 private:
-	int Number_of_group;
+	int NumberOfGroup;
 	int course;
 	int NumberOfStuds;
 	Student* students[30];
 	Schedule* schedule;
 public:
 	Group(int NumberOfStuds, int course, int Number_of_group, Student* students[5], Schedule* schedule);
-	int GetNumber_of_group();
+	int GetNumberOfGroup();
 	int GetNumberOfStuds();
 	Student* GetStud(string name);
 	Student* GetStud(int i);

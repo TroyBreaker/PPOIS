@@ -83,7 +83,7 @@ TEST(TestCaseName, TestName) {
 	Dean.SetScheduleForGroup(arr, 221702);
 	Dean.SetScheduleForTeacher(arr, "Samuel", "IIT");
 	Dean.TransferBudget(221702, 1);
-	EXPECT_EQ(1, 1);
+	EXPECT_EQ('p', ']');
 }
 
 int main(int argc, char* argv[])

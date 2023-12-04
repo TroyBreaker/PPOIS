@@ -4,7 +4,7 @@
 /**
 * @brief Class of Teacher for Department (derived class)
 */
-class Teacher :public Human
+class Teacher : public Human
 {
 private:
 	string degree;
