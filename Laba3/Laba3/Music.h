@@ -6,7 +6,6 @@
 */
 class Music : public Record
 {
-
 	//! genre of music
 	string genre;
 public:

@@ -11,8 +11,6 @@ class Band {
 public:
 	Band(string name) {
 		this->name = name;
-		/*for (int i = 0; i < albums.size(); i++)
-			this->albums.push_back(albums[i]);*/
 	}
 	string GetName() {
 		return name;

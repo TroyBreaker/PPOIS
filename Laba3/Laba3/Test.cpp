@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include <gtest/gtest.h>
 //#include"Application.h"
-#include "Foo.h"
+#include "Methods.h"
 
 TEST(TestCaseName, TestName) {
     Playlist* playlist = new Playlist;
@@ -192,10 +192,4 @@ TEST(TestCaseName, TestName) {
     EXPECT_TRUE(! app->GetCurrent());
     AppOff(app);
     EXPECT_TRUE(!app->GetState());
-}
-
-int main(int argc, char* argv[])
-{
-	testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
 }
