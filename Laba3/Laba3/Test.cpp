@@ -3,7 +3,7 @@
 //#include"Application.h"
 #include "Methods.h"
 
-TEST(TestCaseName, TestName1) {
+TEST(TestCaseName, TestSettings) {
     Playlist* playlist = new Playlist;
     Settings* settings = new Settings;
     Application* app = new Application{ "Olegify",playlist,settings };
@@ -162,7 +162,7 @@ TEST(TestCaseName, TestName1) {
     EXPECT_TRUE(!app->GetState());
 }
 
-TEST(TestCaseName, TestName2) {
+TEST(TestCaseName, TestAdding) {
     Playlist* playlist = new Playlist;
     Settings* settings = new Settings;
     Application* app = new Application{ "Olegify",playlist,settings };
@@ -322,7 +322,7 @@ TEST(TestCaseName, TestName2) {
 }
 
 
-TEST(TestCaseName, TestName3) {
+TEST(TestCaseName, TestDeleteAndTurnOnMusic) {
     Playlist* playlist = new Playlist;
     Settings* settings = new Settings;
     Application* app = new Application{ "Olegify",playlist,settings };
@@ -485,7 +485,7 @@ TEST(TestCaseName, TestName3) {
 }
 
 
-TEST(TestCaseName, TestName4) {
+TEST(TestCaseName, TestTurnOnPodcastAndAlbum) {
     Playlist* playlist = new Playlist;
     Settings* settings = new Settings;
     Application* app = new Application{ "Olegify",playlist,settings };
@@ -630,8 +630,6 @@ TEST(TestCaseName, TestName4) {
     app->AddBand(banda1);
     app->AddBand(banda2);
 
-    AddMusic(app, "Uptown Funk");
-    AddMusic(app, "Roar");
     AddPodcast(app, "TED Radio Hour");
     AddPodcast(app, "WorkLife with Adam Grant");
     AddBand(app, "Bulls");

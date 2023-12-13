@@ -91,7 +91,7 @@ public:
 				if (i != musics.size() - 1) {
 					return musics[i + 1];
 				}
-				else throw new exception("Music set is empty");
+				else throw new exception("Last music");
 			}
 		}
 		
@@ -110,7 +110,7 @@ public:
 			if (podcasts[i]->GetName() == name)
 				if(i!=podcasts.size()-1)
 				return podcasts[i+1];
-				else  throw new exception("Podcast set is empty");
+				else  throw new exception("Last podcast");
 		
 	}
 	Band* GetBand(string name) const

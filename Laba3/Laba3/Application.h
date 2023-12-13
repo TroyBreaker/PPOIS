@@ -17,11 +17,11 @@ class Application {
 	Playlist* playlist;
 	//! setting of application
 	Settings* settings;
-	//! vector of all musics you can listen
+	//! vector of all musics you can listen (all music you can search)
 	vector<Music*> listOfMusic;
-	//! vector of all podcasts you can listen
+	//! vector of all podcasts you can listen (all podcasts you can search)
 	vector<Podcast*> listOfPodcast;
-	//! vector of all bands you can listen
+	//! vector of all bands you can listen (all bands you can search)
 	vector<Band*> listOfBands;
 public:
 	Application(string name, Playlist* playlist, Settings* settings)
