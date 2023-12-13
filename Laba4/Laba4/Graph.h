@@ -302,9 +302,8 @@ namespace NotOrientedGraph {
             ostream& operator<<(ostream& os, const Graph<U>& graph);
     };
     template <typename U>
-    ostream& operator<<(ostream& os, Graph<U>& graph) {
-        typename vector<U>::iterator it = graph.begin();
-        for (int i = 0; i < graph.GetVertexList().size(); i++, it++)
+    ostream& operator<<(ostream& os, Graph<U>& graph) {        
+        for (typename vector<U>::iterator it = graph.begin(); it != graph.end(); it++)
             os << *it;
         return os;
     }
