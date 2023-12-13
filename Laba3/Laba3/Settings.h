@@ -5,27 +5,41 @@
 class Settings {
 	//! current value of volume
 	int volume=30;
+	int const maxVolume = 100;
+	int const minVolume = 0;
 	//! keep 0 if volume not turned off, keep value of volume if volume turned off
-	int MuteVolume=0;
+	int muteVolume=0;
 public:
-	void IncrVolume(int val) {
+	int GetMaxVolume() const
+	{
+		return maxVolume;
+	}
+	int GetMinVolume() const
+	{
+		return minVolume;
+	}
+	void IncrVolume(int val) 
+	{
 		volume += val;
 	}
-	void RedVolume(int val) {
+	void RedVolume(int val) 
+	{
 		volume -= val;
 	}
-	void SetVolume(int volume) {
+	void SetVolume(int volume) 
+	{
 		this->volume = volume;
 	}
-	int GetVolume()
+	int GetVolume() const
 	{
 		return volume;
 	}
-	void SetMuteVolume(int MuteVolume) {
-		this->MuteVolume = MuteVolume;
-	}
-	int GetMuteVolume()
+	void SetMuteVolume(int MuteVolume) 
 	{
-		return MuteVolume;
+		this->muteVolume = MuteVolume;
+	}
+	int GetMuteVolume() const
+	{
+		return muteVolume;
 	}
 };

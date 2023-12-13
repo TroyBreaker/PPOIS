@@ -10,7 +10,7 @@ class Record {
 	//! name of record
 	string name;
 public:
-	string GetName()
+	string GetName() const
 	{
 		return name;
 	}
@@ -20,7 +20,7 @@ public:
 		this->name = name;
 	}
 	Record(){}
-	virtual void GetInfo(string &line)
+	virtual void GetInfo(string &line) const
 	{
 
 	}

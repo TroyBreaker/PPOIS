@@ -9,17 +9,19 @@ class Band {
 	//! name of band
 	string name;
 public:
-	Band(string name) {
+	Band(string name) 
+	{
 		this->name = name;
 	}
-	string GetName() {
+	string GetName()  const
+	{
 		return name;
 	}
 	void SetAlbums(Album*album)
 	{
 		albums.push_back(album);
 	}
-	Album* GetAlbum(string name)
+	Album* GetAlbum(string name)const
 	{
 		for (int i = 0; i < albums.size(); i++)
 			if (albums[i]->GetName() == name)

@@ -13,15 +13,15 @@ public:
 	{
 		this->name = name;
 	}
-	void AddMusic(Music* mus)
+	void AddMusic(Music* music)
 	{
-		this->songs.push_back(mus);
+		this->songs.push_back(music);
 	}
-	string GetName()
+	string GetName()const
 	{
 		return name;
 	}
-	Music* GetFirstSong()
+	Music* GetFirstSong()const
 	{
 		return songs[0];
 	}

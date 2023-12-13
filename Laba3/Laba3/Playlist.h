@@ -15,39 +15,39 @@ class Playlist {
 	//! vector of podcasts in playlist
 	vector<Podcast*> podcasts;
 	//! vector of bands in playlist
-	vector<Band*> ListOfBands;
+	vector<Band*> listOfBands;
 public:
 	Playlist() {}
 
-	void AddMus(Music* rec)
+	void AddMusic(Music* music)
 	{
-		if(!CheckMus(rec->GetName()))
-		musics.push_back(rec);
+		if(!CheckMusic(music->GetName()))
+		musics.push_back(music);
 	}
-	void AddRec(Podcast* rec)
+	void AddPodcast(Podcast* podcast)
 	{
-		if (!CheckPodc(rec->GetName()))
-		podcasts.push_back(rec);
-	}
-
-	void AddBand(Band* rec)
-	{
-		if (!CheckBand(rec->GetName()))
-			ListOfBands.push_back(rec);
+		if (!CheckPodcast(podcast->GetName()))
+		podcasts.push_back(podcast);
 	}
 
-	void DelMus(string name)
+	void AddBand(Band* band)
 	{
-		if (CheckMus(name))
+		if (!CheckBand(band->GetName()))
+			listOfBands.push_back(band);
+	}
+
+	void DeleteMusic(string name)
+	{
+		if (CheckMusic(name))
 		{
 			for (int i = 0; i < musics.size(); i++)
 				if (musics[i]->GetName() == name)
 					musics.erase(musics.begin() + i);
 		}
 	}
-	void DelPodc(string name)
+	void DeletePodcast(string name)
 	{
-		if (CheckPodc(name))
+		if (CheckPodcast(name))
 		{
 			for (int i = 0; i < podcasts.size(); i++)
 				if (podcasts[i]->GetName() == name)
@@ -55,64 +55,69 @@ public:
 		}
 	}
 
-	bool CheckMus(string name)
+	bool CheckMusic(string name) const
 	{
 		for (Music* mus : musics)
 			if (mus->GetName() == name)
 				return 1;
 		return 0;
 	}
-	bool CheckPodc(string name)
+	bool CheckPodcast(string name) const
 	{
 		for (Podcast* mus : podcasts)
 			if (mus->GetName() == name)
 				return 1;
 		return 0;
 	}
-	bool CheckBand(string name)
+	bool CheckBand(string name) const
 	{
-		for (Band* mus : ListOfBands)
+		for (Band* mus : listOfBands)
 			if (mus->GetName() == name)
 				return 1;
 		return 0;
 	}
 
-	Music* GetMusic(string name)
+	Music* GetMusic(string name) const
 	{
 		for (int i = 0; i < musics.size(); i++)
 			if (musics[i]->GetName() == name)
 				return musics[i];
 		return NULL;
 	}
-	Music* GetNextMusic(string name)
+	Music* GetNextMusic(string name) const
 	{
-		for (int i = 0; i < musics.size(); i++)
-			if (musics[i]->GetName() == name)
-				if(i!= musics.size()-1)
-				return musics[i+1];
-		return NULL;
+		for (int i = 0; i < musics.size(); i++) {
+			if (musics[i]->GetName() == name) {
+				if (i != musics.size() - 1) {
+					return musics[i + 1];
+				}
+				else throw new exception("Music set is empty");
+			}
+		}
+		
 	}
 	
-	Podcast* GetPodcast(string name)
+	Podcast* GetPodcast(string name) const
 	{
 		for (int i = 0; i < podcasts.size(); i++)
 			if (podcasts[i]->GetName() == name)
 				return podcasts[i];
 		return NULL;
 	}
-	Podcast* GetNextPodcast(string name)
+	Podcast* GetNextPodcast(string name) const
 	{
 		for (int i = 0; i < podcasts.size(); i++)
 			if (podcasts[i]->GetName() == name)
 				if(i!=podcasts.size()-1)
 				return podcasts[i+1];
-		return NULL;
+				else  throw new exception("Podcast set is empty");
+		
 	}
-	Band* GetBand(string name)
+	Band* GetBand(string name) const
 	{
-		for (int i = 0; i < ListOfBands.size(); i++)
-			if (ListOfBands[i]->GetName() == name)
-				return ListOfBands[i];
+		for (int i = 0; i < listOfBands.size(); i++)
+			if (listOfBands[i]->GetName() == name)
+				return listOfBands[i];
 		return NULL;
 	}
 };

@@ -1,0 +1,336 @@
+\doxysection{Not\+Oriented\+Graph\+::Graph$<$ T $>$ Class Template Reference}
+\label{class_not_oriented_graph_1_1_graph}\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\label{class_not_oriented_graph_1_1_graph_a42cead1af3bd86cdfe935fecf909353f} 
+\textbf{ typedef} \textbf{ vector}$<$ \textbf{ T} $>$ {\bfseries Vertex\+List}
+\item 
+\label{class_not_oriented_graph_1_1_graph_a5c171bc0a7b7646c2ce93b6841720203} 
+\textbf{ typedef} \textbf{ vector}$<$ \textbf{ vector}$<$ \textbf{ T} $>$ $>$ {\bfseries Adjacency\+List}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Graph} (\textbf{ vector}$<$ \textbf{ T} $>$ \textbf{ vertices})
+\begin{DoxyCompactList}\small\item\em Class constructor. \end{DoxyCompactList}\item 
+\textbf{ bool} \textbf{ operator==} (\textbf{ Graph}$<$ \textbf{ T} $>$ \textbf{ other})
+\begin{DoxyCompactList}\small\item\em Operator == overloading. \end{DoxyCompactList}\item 
+\label{class_not_oriented_graph_1_1_graph_a8e27beb1f7ef0ac264c737fad243949b} 
+\textbf{ bool} {\bfseries operator$>$} (\textbf{ Graph}$<$ \textbf{ T} $>$ \textbf{ other})
+\item 
+\label{class_not_oriented_graph_1_1_graph_a68342c6738df924d9127d7232cd655f8} 
+\textbf{ bool} {\bfseries operator$<$} (\textbf{ Graph}$<$ \textbf{ T} $>$ \textbf{ other})
+\item 
+\textbf{ Graph}$<$ \textbf{ T} $>$ \textbf{ operator=} (\textbf{ Graph}$<$ \textbf{ T} $>$ \textbf{ other})
+\begin{DoxyCompactList}\small\item\em Operator = overloading. \end{DoxyCompactList}\item 
+\textbf{ int} \textbf{ Amount\+Of\+Vertices} () \textbf{ const}
+\begin{DoxyCompactList}\small\item\em Method that return amount of vertices in graph. \end{DoxyCompactList}\item 
+\textbf{ int} \textbf{ Amount\+Of\+Edges} () \textbf{ const}
+\begin{DoxyCompactList}\small\item\em Method that return amount of edges in graph. \end{DoxyCompactList}\item 
+\textbf{ int} \textbf{ Degree\+Of\+Vertex} (\textbf{ T} \textbf{ vertex}) \textbf{ const}
+\begin{DoxyCompactList}\small\item\em Method that return degree of vertex in graph (degree is an amount of adjacent vertices) \end{DoxyCompactList}\item 
+\textbf{ int} \textbf{ Degree\+Of\+Edge} (\textbf{ T} \textbf{ first}, \textbf{ T} \textbf{ second}) \textbf{ const}
+\begin{DoxyCompactList}\small\item\em Method that return degree of edge in graph (degree is an amount of such edge) \end{DoxyCompactList}\item 
+\textbf{ void} \textbf{ Add\+Vertex} (\textbf{ T} \textbf{ vertex})
+\begin{DoxyCompactList}\small\item\em Method that add vertex in graph. \end{DoxyCompactList}\item 
+\textbf{ void} \textbf{ Add\+Edge} (\textbf{ T} \textbf{ first}, \textbf{ T} \textbf{ second})
+\begin{DoxyCompactList}\small\item\em Method that add edge in graph. \end{DoxyCompactList}\item 
+\textbf{ void} \textbf{ Remove\+Vertex} (\textbf{ T} \textbf{ vertex})
+\begin{DoxyCompactList}\small\item\em Method that delete vertex in graph. \end{DoxyCompactList}\item 
+\textbf{ void} \textbf{ Remove\+Edge} (\textbf{ T} \textbf{ first}, \textbf{ T} \textbf{ second})
+\begin{DoxyCompactList}\small\item\em Method that remove edge from graph. \end{DoxyCompactList}\item 
+\textbf{ bool} \textbf{ Presence\+Of\+Vertex} (\textbf{ T} \textbf{ vertex}) \textbf{ const}
+\begin{DoxyCompactList}\small\item\em Method that check presence of vertex in graph. \end{DoxyCompactList}\item 
+\textbf{ bool} \textbf{ Presence\+Of\+Edge} (\textbf{ T} \textbf{ first}, \textbf{ T} \textbf{ second}) \textbf{ const}
+\item 
+\textbf{ bool} \textbf{ empty} ()
+\begin{DoxyCompactList}\small\item\em Method that check if graph is empty. \end{DoxyCompactList}\item 
+\label{class_not_oriented_graph_1_1_graph_a38be5e4ee0390e67ec4df4641b8ff9fa} 
+\textbf{ void} {\bfseries clear} ()
+\begin{DoxyCompactList}\small\item\em Method that make graph empty. \end{DoxyCompactList}\item 
+Adjacency\+List \textbf{ Get\+Adjacency\+List} ()
+\begin{DoxyCompactList}\small\item\em Getter of adjacency\+\_\+list. \end{DoxyCompactList}\item 
+Vertex\+List \textbf{ Get\+Vertex\+List} ()
+\begin{DoxyCompactList}\small\item\em Getter of vertex\+\_\+list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\label{class_not_oriented_graph_1_1_graph_a13b6d1e664caab36a3f7005136e8f6a7} 
+\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}!Graph@{Graph}}
+\index{Graph@{Graph}!NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection{Graph()}
+{\footnotesize\ttfamily template$<$\textbf{ typename} \textbf{ T} $>$ \\
+\textbf{ Not\+Oriented\+Graph\+::\+Graph}$<$ \textbf{ T} $>$\+::\+Graph (\begin{DoxyParamCaption}\item[{\textbf{ vector}$<$ \textbf{ T} $>$}]{vertices }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Class constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & of vertices of any type \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\label{class_not_oriented_graph_1_1_graph_a69a4c39bb651200879cbdff22a9a4853} 
+\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}!AddEdge@{AddEdge}}
+\index{AddEdge@{AddEdge}!NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection{AddEdge()}
+{\footnotesize\ttfamily template$<$\textbf{ typename} \textbf{ T} $>$ \\
+\textbf{ void} \textbf{ Not\+Oriented\+Graph\+::\+Graph}$<$ \textbf{ T} $>$\+::\+Add\+Edge (\begin{DoxyParamCaption}\item[{\textbf{ T}}]{first,  }\item[{\textbf{ T}}]{second }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method that add edge in graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em first} & incident vertex of new edge \\
+\hline
+{\em second} & incident vertex of new edge \\
+\hline
+\end{DoxyParams}
+\label{class_not_oriented_graph_1_1_graph_ac69538ac885aae9eef96abc93621026f} 
+\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}!AddVertex@{AddVertex}}
+\index{AddVertex@{AddVertex}!NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection{AddVertex()}
+{\footnotesize\ttfamily template$<$\textbf{ typename} \textbf{ T} $>$ \\
+\textbf{ void} \textbf{ Not\+Oriented\+Graph\+::\+Graph}$<$ \textbf{ T} $>$\+::\+Add\+Vertex (\begin{DoxyParamCaption}\item[{\textbf{ T}}]{vertex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method that add vertex in graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new} & vertex \\
+\hline
+\end{DoxyParams}
+\label{class_not_oriented_graph_1_1_graph_aef472e131dd14ad9b5b2f1b8e8e1052c} 
+\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}!AmountOfEdges@{AmountOfEdges}}
+\index{AmountOfEdges@{AmountOfEdges}!NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection{AmountOfEdges()}
+{\footnotesize\ttfamily template$<$\textbf{ typename} \textbf{ T} $>$ \\
+\textbf{ int} \textbf{ Not\+Oriented\+Graph\+::\+Graph}$<$ \textbf{ T} $>$\+::\+Amount\+Of\+Edges (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method that return amount of edges in graph. 
+
+\begin{DoxyReturn}{Returns}
+amount of edges in graph 
+\end{DoxyReturn}
+\label{class_not_oriented_graph_1_1_graph_a6465ed56ce844f4ceeb5518552e740bd} 
+\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}!AmountOfVertices@{AmountOfVertices}}
+\index{AmountOfVertices@{AmountOfVertices}!NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection{AmountOfVertices()}
+{\footnotesize\ttfamily template$<$\textbf{ typename} \textbf{ T} $>$ \\
+\textbf{ int} \textbf{ Not\+Oriented\+Graph\+::\+Graph}$<$ \textbf{ T} $>$\+::\+Amount\+Of\+Vertices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method that return amount of vertices in graph. 
+
+\begin{DoxyReturn}{Returns}
+amount of vertices in graph 
+\end{DoxyReturn}
+\label{class_not_oriented_graph_1_1_graph_aefee86f0d1f132be64742931821e4838} 
+\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}!DegreeOfEdge@{DegreeOfEdge}}
+\index{DegreeOfEdge@{DegreeOfEdge}!NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection{DegreeOfEdge()}
+{\footnotesize\ttfamily template$<$\textbf{ typename} \textbf{ T} $>$ \\
+\textbf{ int} \textbf{ Not\+Oriented\+Graph\+::\+Graph}$<$ \textbf{ T} $>$\+::\+Degree\+Of\+Edge (\begin{DoxyParamCaption}\item[{\textbf{ T}}]{first,  }\item[{\textbf{ T}}]{second }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method that return degree of edge in graph (degree is an amount of such edge) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em first} & incident vertex of edge \\
+\hline
+{\em second} & incident vertex of edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+degree of edge in graph 
+\end{DoxyReturn}
+\label{class_not_oriented_graph_1_1_graph_a05557df2df57b4b1daf579a125f84371} 
+\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}!DegreeOfVertex@{DegreeOfVertex}}
+\index{DegreeOfVertex@{DegreeOfVertex}!NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection{DegreeOfVertex()}
+{\footnotesize\ttfamily template$<$\textbf{ typename} \textbf{ T} $>$ \\
+\textbf{ int} \textbf{ Not\+Oriented\+Graph\+::\+Graph}$<$ \textbf{ T} $>$\+::\+Degree\+Of\+Vertex (\begin{DoxyParamCaption}\item[{\textbf{ T}}]{vertex }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method that return degree of vertex in graph (degree is an amount of adjacent vertices) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+degree of vertex in graph 
+\end{DoxyReturn}
+\label{class_not_oriented_graph_1_1_graph_a0c42212287fd03f362f5cda43df91062} 
+\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}!empty@{empty}}
+\index{empty@{empty}!NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection{empty()}
+{\footnotesize\ttfamily template$<$\textbf{ typename} \textbf{ T} $>$ \\
+\textbf{ bool} \textbf{ Not\+Oriented\+Graph\+::\+Graph}$<$ \textbf{ T} $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method that check if graph is empty. 
+
+\begin{DoxyReturn}{Returns}
+true if graph is empty, false in other case 
+\end{DoxyReturn}
+\label{class_not_oriented_graph_1_1_graph_a529d790be9d6cedf5d4911ddf86eeca5} 
+\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}!GetAdjacencyList@{GetAdjacencyList}}
+\index{GetAdjacencyList@{GetAdjacencyList}!NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection{GetAdjacencyList()}
+{\footnotesize\ttfamily template$<$\textbf{ typename} \textbf{ T} $>$ \\
+Adjacency\+List \textbf{ Not\+Oriented\+Graph\+::\+Graph}$<$ \textbf{ T} $>$\+::\+Get\+Adjacency\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Getter of adjacency\+\_\+list. 
+
+\begin{DoxyReturn}{Returns}
+adjacency\+\_\+list 
+\end{DoxyReturn}
+\label{class_not_oriented_graph_1_1_graph_a5e8c504ede404886b3ee96d10c8b0940} 
+\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}!GetVertexList@{GetVertexList}}
+\index{GetVertexList@{GetVertexList}!NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection{GetVertexList()}
+{\footnotesize\ttfamily template$<$\textbf{ typename} \textbf{ T} $>$ \\
+Vertex\+List \textbf{ Not\+Oriented\+Graph\+::\+Graph}$<$ \textbf{ T} $>$\+::\+Get\+Vertex\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Getter of vertex\+\_\+list. 
+
+\begin{DoxyReturn}{Returns}
+vertex\+\_\+list 
+\end{DoxyReturn}
+\label{class_not_oriented_graph_1_1_graph_aca9274f6c63baa13c3a2149294f80338} 
+\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection{operator=()}
+{\footnotesize\ttfamily template$<$\textbf{ typename} \textbf{ T} $>$ \\
+\textbf{ Graph}$<$ \textbf{ T} $>$ \textbf{ Not\+Oriented\+Graph\+::\+Graph}$<$ \textbf{ T} $>$\textbf{ \+::operator}= (\begin{DoxyParamCaption}\item[{\textbf{ Graph}$<$ \textbf{ T} $>$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Operator = overloading. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em The} & object to which we will assign fields \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+address 
+\end{DoxyReturn}
+\label{class_not_oriented_graph_1_1_graph_aa2cfce73ed2383f091f816a42b8057ca} 
+\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}!operator==@{operator==}}
+\index{operator==@{operator==}!NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection{operator==()}
+{\footnotesize\ttfamily template$<$\textbf{ typename} \textbf{ T} $>$ \\
+\textbf{ bool} \textbf{ Not\+Oriented\+Graph\+::\+Graph}$<$ \textbf{ T} $>$\textbf{ \+::operator}== (\begin{DoxyParamCaption}\item[{\textbf{ Graph}$<$ \textbf{ T} $>$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Operator == overloading. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em The} & object we are compared with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Is it equal 
+\end{DoxyReturn}
+\label{class_not_oriented_graph_1_1_graph_a801a3eedba898958682c68d71e1fa248} 
+\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}!PresenceOfEdge@{PresenceOfEdge}}
+\index{PresenceOfEdge@{PresenceOfEdge}!NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection{PresenceOfEdge()}
+{\footnotesize\ttfamily template$<$\textbf{ typename} \textbf{ T} $>$ \\
+\textbf{ bool} \textbf{ Not\+Oriented\+Graph\+::\+Graph}$<$ \textbf{ T} $>$\+::\+Presence\+Of\+Edge (\begin{DoxyParamCaption}\item[{\textbf{ T}}]{first,  }\item[{\textbf{ T}}]{second }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyVerb}  @brief Method that check presence of edge in graph
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}{Parameters}
+{\em first} & incident vertex of edge you want to check \\
+\hline
+{\em second} & incident vertex of edge you want to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if edge exist, false in other case 
+\end{DoxyReturn}
+\label{class_not_oriented_graph_1_1_graph_aac9e6f08308bcf14e39aa820f1adf162} 
+\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}!PresenceOfVertex@{PresenceOfVertex}}
+\index{PresenceOfVertex@{PresenceOfVertex}!NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection{PresenceOfVertex()}
+{\footnotesize\ttfamily template$<$\textbf{ typename} \textbf{ T} $>$ \\
+\textbf{ bool} \textbf{ Not\+Oriented\+Graph\+::\+Graph}$<$ \textbf{ T} $>$\+::\+Presence\+Of\+Vertex (\begin{DoxyParamCaption}\item[{\textbf{ T}}]{vertex }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method that check presence of vertex in graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if vertex exist, false in other case 
+\end{DoxyReturn}
+\label{class_not_oriented_graph_1_1_graph_ad4e4be9434247031cb8f0dcd3982b817} 
+\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}!RemoveEdge@{RemoveEdge}}
+\index{RemoveEdge@{RemoveEdge}!NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection{RemoveEdge()}
+{\footnotesize\ttfamily template$<$\textbf{ typename} \textbf{ T} $>$ \\
+\textbf{ void} \textbf{ Not\+Oriented\+Graph\+::\+Graph}$<$ \textbf{ T} $>$\+::\+Remove\+Edge (\begin{DoxyParamCaption}\item[{\textbf{ T}}]{first,  }\item[{\textbf{ T}}]{second }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method that remove edge from graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em first} & incident vertex of edge you want to remove \\
+\hline
+{\em second} & incident vertex of edge you want to remove \\
+\hline
+\end{DoxyParams}
+\label{class_not_oriented_graph_1_1_graph_adba2bda80496ae6b6d61b4344bdf22a7} 
+\index{NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}!RemoveVertex@{RemoveVertex}}
+\index{RemoveVertex@{RemoveVertex}!NotOrientedGraph::Graph$<$ T $>$@{NotOrientedGraph::Graph$<$ T $>$}}
+\doxysubsubsection{RemoveVertex()}
+{\footnotesize\ttfamily template$<$\textbf{ typename} \textbf{ T} $>$ \\
+\textbf{ void} \textbf{ Not\+Oriented\+Graph\+::\+Graph}$<$ \textbf{ T} $>$\+::\+Remove\+Vertex (\begin{DoxyParamCaption}\item[{\textbf{ T}}]{vertex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method that delete vertex in graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex} & you want to delete \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Graph.\+h\end{DoxyCompactItemize}

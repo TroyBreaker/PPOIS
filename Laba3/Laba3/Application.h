@@ -8,6 +8,7 @@ using namespace std;
 class Application {
 	//! name of application
 	string name;
+	
 	//! state of application, 0-turn off, 1-turn on
 	bool state = 0;
 	//! current record, record that you listen now
@@ -17,11 +18,11 @@ class Application {
 	//! setting of application
 	Settings* settings;
 	//! vector of all musics you can listen
-	vector<Music*> ListOfMusic;
+	vector<Music*> listOfMusic;
 	//! vector of all podcasts you can listen
-	vector<Podcast*> ListOfPodcast;
+	vector<Podcast*> listOfPodcast;
 	//! vector of all bands you can listen
-	vector<Band*> ListOfBands;
+	vector<Band*> listOfBands;
 public:
 	Application(string name, Playlist* playlist, Settings* settings)
 	{
@@ -29,95 +30,84 @@ public:
 		this->playlist = playlist;
 		this->settings = settings;
 	}
+	
 	void SetCurrent(Record* current)
 	{
 		this->current = current;
 	}
-	Record* GetCurrent()
+	Record* GetCurrent() const
 	{
 		return current;
 	}
-	Settings* GetSet() {
+	Settings* GetSettings() const
+	{
 		return settings;
 	}
 
-	bool GetState()
+	bool GetState() const
 	{
 		return state;
 	}
 
-	void SetState(bool state) {
+	void SetState(bool state) 
+	{
 		this->state = state;
 	}
 
-	Playlist* GetPlaylist()
+	Playlist* GetPlaylist() const
 	{
 		return playlist;
 	}
 
 	void SetListOfBands(vector<Band*> ListOfBands)
 	{
-		for (Band* mus : ListOfBands)
-			this->ListOfBands.push_back(mus);
+		for (Band* band : ListOfBands)
+			this->listOfBands.push_back(band);
 	}
-	void AddBand(Band* mus)
+	void AddBand(Band* music)
 	{
-		this->ListOfBands.push_back(mus);
+		this->listOfBands.push_back(music);
 	}
 
 	void SetListOfMusic(vector<Music*> ListOfMusic)
 	{
-		for (Music* mus : ListOfMusic)
-			this->ListOfMusic.push_back(mus);
+		for (Music* music : ListOfMusic)
+			this->listOfMusic.push_back(music);
 	}
-	void AddMusic(Music* mus)
+	void AddMusic(Music* music)
 	{
-		this->ListOfMusic.push_back(mus);
+		this->listOfMusic.push_back(music);
 	}
 	void SetListOfPodcast(vector<Podcast*> ListOfPodcast)
 	{
-		for (Podcast* mus : ListOfPodcast)
-			this->ListOfPodcast.push_back(mus);
+		for (Podcast* podcast : ListOfPodcast)
+			this->listOfPodcast.push_back(podcast);
 	}
-	void AddPodcast(Podcast* mus)
+	void AddPodcast(Podcast* podcast)
 	{
-		this->ListOfPodcast.push_back(mus);
-	}
-	bool CheckMusic(string name)
-	{
-		for (Music* mus : ListOfMusic)
-			if (mus->GetName() == name)
-				return 1;
-		return 0;
-	}
-	bool CheckPodc(string name)
-	{
-		for (Podcast* mus : ListOfPodcast)
-			if (mus->GetName() == name)
-				return 1;
-		return 0;
+		this->listOfPodcast.push_back(podcast);
 	}
 
-	Music* GetMusic(string name)
+	Music* GetMusic(string name) const
 	{
-		for (int i = 0; i < ListOfMusic.size(); i++)
-			if (ListOfMusic[i]->GetName() == name)
-				return ListOfMusic[i];
+		for (int i = 0; i < listOfMusic.size(); i++)
+			if (listOfMusic[i]->GetName() == name)
+				return listOfMusic[i];
 		return NULL;
 	}
-	Podcast* GetPodcast(string name)
+	Podcast* GetPodcast(string name) const
 	{
-		for (int i = 0; i < ListOfPodcast.size(); i++)
-			if (ListOfPodcast[i]->GetName() == name)
-				return ListOfPodcast[i];
+		for (int i = 0; i < listOfPodcast.size(); i++)
+			if (listOfPodcast[i]->GetName() == name)
+				return listOfPodcast[i];
 		return NULL;
 	}
 
-	Band* GetBand(string name)
+	Band* GetBand(string name) const
 	{
-		for (int i = 0; i < ListOfBands.size(); i++)
-			if (ListOfBands[i]->GetName() == name)
-				return ListOfBands[i];
+		for (int i = 0; i < listOfBands.size(); i++)
+			if (listOfBands[i]->GetName() == name)
+				return listOfBands[i];
 		return NULL;
 	}
 };

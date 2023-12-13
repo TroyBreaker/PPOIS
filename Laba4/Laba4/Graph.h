@@ -1,7 +1,8 @@
 #include <iostream>
 #include <vector>
-//#include <iterator>
+#include <iterator>
 using namespace std;
+
 
 namespace NotOrientedGraph {
     template <typename T>
@@ -9,6 +10,7 @@ namespace NotOrientedGraph {
     public:
         typedef vector<T> VertexList;
         typedef vector<vector<T>> AdjacencyList;
+        typedef typename VertexList::iterator vertex_iterator;
         /**
      * @brief Class constructor
      * @param vector of vertices of any type
@@ -18,7 +20,7 @@ namespace NotOrientedGraph {
             vertex_list = vertices;
         }
         Graph() {}
-        
+
         /**
     * @brief Operator == overloading
     * @param The object we are compared with
@@ -27,19 +29,12 @@ namespace NotOrientedGraph {
         bool operator==(Graph<T> other)
         {
             VertexList other_vertices = other.GetVertexList();
-            AdjacencyList other_adjacency_list = other.GetAdjacencyList();
-            if (other_vertices.size() != vertex_list.size()) {
-                return 0;
-            }            
-            return 1;
+            return (other_vertices.size() == vertex_list.size()) ? true : false;
         }
         bool operator>(Graph<T> other)
         {
             VertexList other_vertices = other.GetVertexList();
-            if (vertex_list.size() > other_vertices.size()) {
-                return 1;
-            }
-            else return 0;
+            return (vertex_list.size() > other_vertices.size()) ? true : false;
         }
         bool operator<(Graph<T> other)
         {
@@ -48,7 +43,7 @@ namespace NotOrientedGraph {
 
         /**
     * @brief Operator = overloading
-    * @param The object to which we will assign fields 
+    * @param The object to which we will assign fields
     * @return address
     */
         Graph<T> operator=(Graph<T> other) {
@@ -70,27 +65,29 @@ namespace NotOrientedGraph {
         int AmountOfEdges() const {
             int EdgeAmount = 0;
             for (int Current = 0; Current < adjacency_list.size(); Current++)
-                for (int AdjacentWithCurrent = 0; AdjacentWithCurrent < adjacency_list[Current].size(); AdjacentWithCurrent++) {
-                    EdgeAmount ++;
-                }
-            return EdgeAmount/2;
+                EdgeAmount += adjacency_list[Current].size();
+            return EdgeAmount / 2;
         }
+
         /**
     * @brief Method that return degree of vertex in graph (degree is an amount of adjacent vertices)
     * @param vertex
-    * @return degree of vertex in graph 
+    * @return degree of vertex in graph
     */
         int DegreeOfVertex(T vertex) const {
-            if (!PresenceOfVertex(vertex)) {
-                throw std::exception("invalid vertex");
+            int index;
+            try {
+                index = IndexOfVertex(vertex);
+            }
+            catch (const exception* ex)
+            {
+                cout << ex->what() << endl;
+                return -1;
             }
             int degree = 0;
-            for (int i = 0; i < vertex_list.size(); i++)
-                if (vertex_list[i] == vertex) {
-                    for (int j = 0; j < adjacency_list[i].size(); j++)
-                        degree++;
-                    return degree;
-                }
+            for (int j = 0; j < adjacency_list[index].size(); j++)
+                degree++;
+            return degree;
         }
         /**
     * @brief Method that return degree of edge in graph (degree is an amount of such edge)
@@ -98,27 +95,35 @@ namespace NotOrientedGraph {
     * @param second incident vertex of edge
     * @return degree of edge in graph
     */
-        int DegreeOfEdge(T first, T second) const {
-            int index = 0, second_index = 0;
-            for (int i = 0; i < vertex_list.size(); i++) {
-                if (first == vertex_list[i]) {
-                    index = i;
+        vector<int> DegreeOfEdge(T first, T second) const {
+            try {
+                if (!PresenceOfEdge(first, second)) {
+                    throw std::exception("there is no such edge");
                 }
             }
-            int degree = 0;
-            for (int j = 0; j < adjacency_list[index].size(); j++)
-                if(adjacency_list[index][j]==second)
-                degree++;
-
-            return degree;
+            catch (const exception& ex)
+            {
+                cout << ex.what() << endl;
+                return { -1,-1 };
+            }
+            int first_index = DegreeOfVertex(first);
+            int second_index = DegreeOfVertex(second);
+            return { first_index ,second_index };
         }
+
         /**
-    * @brief Method that add vertex in graph 
+    * @brief Method that add vertex in graph
     * @param new vertex
     */
         void AddVertex(T vertex) {
-            if (PresenceOfVertex(vertex)) {
-                throw std::exception("invalid vertex to add");
+            try {
+                if (PresenceOfVertex(vertex)) {
+                    throw std::exception("invalid vertex to add");
+                }
+            }
+            catch (const exception& ex) {
+                cout << ex.what() << endl;
+                return;
             }
             vertex_list.push_back(vertex);
             vector<T> edges_addition;
@@ -130,17 +135,14 @@ namespace NotOrientedGraph {
    * @param second incident vertex of new edge
    */
         void AddEdge(T first, T second) {
-            if (!PresenceOfVertex(first) || !PresenceOfVertex(second)) {
-                throw std::exception("there is no such vertex");
+            int first_index, second_index;
+            try {
+                first_index = IndexOfVertex(first);
+                second_index = IndexOfVertex(second);
             }
-            int first_index = 0, second_index = 0;
-            for (int i = 0; i < vertex_list.size(); i++) {
-                if (first == vertex_list[i]) {
-                    first_index = i;
-                }
-                if (second == vertex_list[i]) {
-                    second_index = i;
-                }
+            catch (const exception* ex) {
+                cout << ex->what() << endl;
+                return;
             }
             adjacency_list[first_index].push_back(second);
             adjacency_list[second_index].push_back(first);
@@ -150,15 +152,14 @@ namespace NotOrientedGraph {
     * @param vertex you want to delete
     */
         void RemoveVertex(T vertex) {
-            if (!PresenceOfVertex(vertex)) {
-                throw std::exception("there is no such vertex");
+            int index;
+            try {
+                index = IndexOfVertex(vertex);
             }
-            int index = 0;
-            for (int i = 0; i < vertex_list.size(); i++)
-                if (vertex_list[i] == vertex) {
-                    index = i;
-                    break;
-                }
+            catch (const exception* ex) {
+                cout << ex->what() << endl;
+                return;
+            }
             for (int AdjacentWithDeleted = 0; AdjacentWithDeleted < adjacency_list[index].size(); AdjacentWithDeleted++) {
                 for (int Current = 0; Current < vertex_list.size(); Current++)
                 {
@@ -185,26 +186,30 @@ namespace NotOrientedGraph {
   * @param second incident vertex of edge you want to remove
   */
         void RemoveEdge(T first, T second) {
-            if (!PresenceOfEdge(first, second)) {
-                throw std::exception("there is no such edge");
-            }
-            int first_index = 0, second_index = 0;
-            for (int i = 0; i < vertex_list.size(); i++) {
-                if (first == vertex_list[i]) {
-                    first_index = i;
-                }
-                if (second == vertex_list[i]) {
-                    second_index = i;
+            try {
+                if (!PresenceOfEdge(first, second)) {
+                    throw std::exception("there is no such edge");
                 }
             }
+            catch (const exception& ex)
+            {
+                cout << ex.what() << endl;
+                return;
+            }
+            int first_index, second_index;
+            first_index = IndexOfVertex(first);
+            second_index = IndexOfVertex(second);
+
             for (int i = 0; i < adjacency_list[first_index].size(); i++) {
                 if (adjacency_list[first_index][i] == second) {
                     adjacency_list[first_index].erase(adjacency_list[first_index].begin() + i);
+                    i--;
                 }
             }
             for (int i = 0; i < adjacency_list[second_index].size(); i++) {
                 if (adjacency_list[second_index][i] == first) {
                     adjacency_list[second_index].erase(adjacency_list[second_index].begin() + i);
+                    i--;
                 }
             }
         }
@@ -213,9 +218,9 @@ namespace NotOrientedGraph {
         * @param vertex
         * @return true if vertex exist, false in other case
         */
-        bool PresenceOfVertex(T vertex) const {
-            for (int i = 0; i < vertex_list.size(); i++)
-                if (vertex == vertex_list[i]) {
+        bool PresenceOfVertex(T vertex) {
+            for (vertex_iterator it = this->begin(); it != this->end(); it++)
+                if (vertex == *it) {
                     return true;
                 }
             return false;
@@ -227,14 +232,14 @@ namespace NotOrientedGraph {
   * @return true if edge exist, false in other case
         */
         bool PresenceOfEdge(T first, T second) const {
-            if (!PresenceOfVertex(first) || !PresenceOfVertex(second)) {
-                throw std::exception("there is no such vertex");
+            int first_index;
+            try {
+                first_index = IndexOfVertex(first);
             }
-            int first_index = 0, second_index = 0;
-            for (int i = 0; i < vertex_list.size(); i++) {
-                if (first == vertex_list[i]) {
-                    first_index = i;
-                }
+            catch (const exception* ex)
+            {
+                cout << ex->what() << endl;
+                return 0;
             }
             bool isHasEdge = 0;
             for (int i = 0; i < adjacency_list[first_index].size(); i++) {
@@ -242,12 +247,11 @@ namespace NotOrientedGraph {
                     isHasEdge = 1;
                 }
             }
-
             if (isHasEdge) {
                 return true;
             }
-
-            return false;
+            else
+                return false;
         }
         /**
         * @brief Method that check if graph is empty
@@ -278,10 +282,30 @@ namespace NotOrientedGraph {
             return vertex_list;
         }
 
+        vertex_iterator begin() { return vertex_list.begin(); }
+        vertex_iterator end() { return vertex_list.end(); }
+
     private:
         //! vector of vertices
         VertexList vertex_list;
         //! adjacency list is presented ih the form of vector of vectors of vertices
         AdjacencyList adjacency_list;
+
+        int IndexOfVertex(T vertex) const
+        {
+            for (int i = 0; i < vertex_list.size(); i++)
+                if (vertex_list[i] == vertex)
+                    return i;
+            throw new exception("invalid vertex");
+        }
+       template <typename U> friend
+            ostream& operator<<(ostream& os, const Graph<U>& graph);
     };
+    template <typename U>
+    ostream& operator<<(ostream& os, Graph<U>& graph) {
+        typename vector<U>::iterator it = graph.begin();
+        for (int i = 0; i < graph.GetVertexList().size(); i++, it++)
+            os << *it;
+        return os;
+    }
 }

@@ -15,7 +15,7 @@ public:
 	}
 	Music(){}
 	
-	void GetInfo(string& line)override
+	void GetInfo(string& line) const override
 	{
 		line += (this->GetName() + " ");
 		line += this->genre;

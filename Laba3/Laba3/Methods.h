@@ -4,7 +4,8 @@
 	* @brief Method that turn on application
 	* @param object of class application
 	*/
-bool AppOn(Application*& app) {
+bool AppOn(Application*& app) 
+{
 	if (app->GetState() == 0) {
 		app->SetState(1);
 		return 1;
@@ -16,7 +17,8 @@ bool AppOn(Application*& app) {
 	* @brief Method that turn off application
 	* @param object of class application
 	*/
-bool AppOff(Application*& app) {
+bool AppOff(Application*& app) 
+{
 	if (app->GetState() == 1) {
 		app->SetState(0);
 		return 1;
@@ -29,11 +31,13 @@ bool AppOff(Application*& app) {
 	* @param object of class application
 	* @param the value by which we increase
 	*/
-bool IncrVolume(Application*& app, int val) {
-	if (app->GetSet()->GetVolume() + val > 100) {
+bool IncreaseVolume(Application*& app, int val) 
+{
+
+	if (app->GetSettings()->GetVolume() + val > app->GetSettings()->GetMaxVolume()) {
 		return 0;
 	}
-	app->GetSet()->IncrVolume(val);
+	app->GetSettings()->IncrVolume(val);
 	return 1;
 }
 
@@ -42,11 +46,12 @@ bool IncrVolume(Application*& app, int val) {
 	* @param object of class application
 	* @param the value by which we reduce
 	*/
-bool RedVolume(Application*& app, int val) {
-	if (app->GetSet()->GetVolume() - val < 0) {
+bool ReduceVolume(Application*& app, int val) 
+{
+	if (app->GetSettings()->GetVolume() - val < app->GetSettings()->GetMinVolume()) {
 		return 0;
 	}
-	app->GetSet()->RedVolume(val);
+	app->GetSettings()->RedVolume(val);
 	return 1;
 }
 /**
@@ -55,8 +60,8 @@ bool RedVolume(Application*& app, int val) {
 	*/
 bool VolumeOff(Application*& app)
 {
-	app->GetSet()->SetMuteVolume(app->GetSet()->GetVolume());
-	app->GetSet()->SetVolume(0);
+	app->GetSettings()->SetMuteVolume(app->GetSettings()->GetVolume());
+	app->GetSettings()->SetVolume(0);
 	return 1;
 }
 /**
@@ -65,8 +70,8 @@ bool VolumeOff(Application*& app)
 	*/
 bool VolumeOn(Application*& app)
 {
-	app->GetSet()->SetVolume(app->GetSet()->GetMuteVolume());
-	app->GetSet()->SetMuteVolume(0);
+	app->GetSettings()->SetVolume(app->GetSettings()->GetMuteVolume());
+	app->GetSettings()->SetMuteVolume(0);
 	return 1;
 }
 /**
@@ -75,10 +80,12 @@ bool VolumeOn(Application*& app)
 	* @param name of music you want to add
 	* \brief music you want to add is being searched amongst all musics in the vector of Music* in class Application
 	*/
-void AddMusic(Application*& app, string name) {
-	if (!app->CheckMusic(name))
+void AddMusic(Application*& app, string name) 
+{
+	Music* added = app->GetMusic(name);
+	if (!added)
 		return;
-	app->GetPlaylist()->AddMus(app->GetMusic(name));
+	app->GetPlaylist()->AddMusic(added);
 	return;
 }
 /**
@@ -87,10 +94,12 @@ void AddMusic(Application*& app, string name) {
 	* @param name of podcast you want to add
 	* \brief podcast you want to add is being searched amongst all podcasts in the vector of Podcast* in class Application
 	*/
-void AddPodcast(Application*& app, string name) {
-	if (!app->CheckPodc(name))
+void AddPodcast(Application*& app, string name) 
+{
+	Podcast* added = app->GetPodcast(name);
+	if (!added)
 		return;
-	app->GetPlaylist()->AddRec(app->GetPodcast(name));
+	app->GetPlaylist()->AddPodcast(added);
 	return;
 }
 /**
@@ -99,10 +108,12 @@ void AddPodcast(Application*& app, string name) {
 	* @param name of band you want to add
 	* \brief band you want to add is being searched amongst all bands in the vector of Band* in class Application
 	*/
-void AddBand(Application*& app, string name) {
-	if (!app->GetBand(name))
+void AddBand(Application*& app, string name) 
+{
+	Band* added = app->GetBand(name);
+	if (!added)
 		return;
-	app->GetPlaylist()->AddBand(app->GetBand(name));
+	app->GetPlaylist()->AddBand(added);
 	return;
 }
 /**
@@ -110,16 +121,18 @@ void AddBand(Application*& app, string name) {
 	* @param object of class application
 	* @param name of podcast you want to delete
 	*/
-void DelPodcast(Application*& app,string name ) {
-	app->GetPlaylist()->DelPodc(name);
+void DeletePodcastFomPlaylist(Application*& app,string name ) 
+{
+	app->GetPlaylist()->DeletePodcast(name);
 }
 /**
 	* @brief Method that delete music from playlist
 	* @param object of class application
 	* @param name of music you want to delete
 	*/
-void DelMusic(Application*& app, string name) {
-	app->GetPlaylist()->DelMus(name);
+void DeleteMusicFromPlaylist(Application*& app, string name) 
+{
+	app->GetPlaylist()->DeleteMusic(name);
 }
 /**
 	* @brief Method that turn on music to listen
@@ -128,9 +141,10 @@ void DelMusic(Application*& app, string name) {
 	*/
 void TurnOnMusic(Application*& app, string name)
 {
-	if (!app->GetMusic(name))
+	Music* turned = app->GetMusic(name);
+	if (!turned)
 		return;
-	app->SetCurrent(app->GetMusic(name));
+	app->SetCurrent(turned);
 }
 /**
 	* @brief Method that turn on podcast to listen
@@ -139,9 +153,10 @@ void TurnOnMusic(Application*& app, string name)
 	*/
 void TurnOnPodcast(Application*& app, string name)
 {
-	if (!app->GetPodcast(name))
+	Podcast* turned = app->GetPodcast(name);
+	if (!turned)
 		return;
-	app->SetCurrent(app->GetPodcast(name));
+	app->SetCurrent(turned);
 }
 /**
 	* @brief Method that turn off listening record
@@ -158,9 +173,10 @@ void TurnOffRecord(Application*& app)
 	*/
 void TurnOnMusicOnPlaylist(Application*& app, string name)
 {
-	if (!app->GetPlaylist()->GetMusic(name))
+	Music* turned = app->GetPlaylist()->GetMusic(name);
+	if (!turned)
 		return;
-	app->SetCurrent(app->GetPlaylist()->GetMusic(name));
+	app->SetCurrent(turned);
 }
 /**
 	* @brief Method that turn on podcast to listen from playlist
@@ -169,9 +185,10 @@ void TurnOnMusicOnPlaylist(Application*& app, string name)
 	*/
 void TurnOnPodcastOnPlaylist(Application*& app, string name)
 {
-	if (!app->GetPlaylist()->GetPodcast(name))
+	Podcast* turned = app->GetPlaylist()->GetPodcast(name);
+	if (!turned)
 		return;
-	app->SetCurrent(app->GetPlaylist()->GetPodcast(name));
+	app->SetCurrent(turned);
 }
 /**
 	* @brief Method that turn on next podcast to listen from playlist
@@ -180,7 +197,15 @@ void TurnOnPodcastOnPlaylist(Application*& app, string name)
 void TurnOnNextPodcast(Application*& app)
 {
 	string name = app->GetCurrent()->GetName();
-	app->SetCurrent(app->GetPlaylist()->GetNextPodcast(name));
+	try {
+		Podcast* nextPodcast = app->GetPlaylist()->GetNextPodcast(name);
+		app->SetCurrent(nextPodcast);
+	}
+	catch (const exception* ex)
+	{
+		app->SetCurrent(NULL);
+		cout << ex->what() << endl;
+	}
 }
 /**
 	* @brief Method that turn on next music to listen from playlist
@@ -189,7 +214,15 @@ void TurnOnNextPodcast(Application*& app)
 void TurnOnNextMusic(Application*& app)
 {
 	string name = app->GetCurrent()->GetName();
-	app->SetCurrent(app->GetPlaylist()->GetNextMusic(name));
+	try {
+		Music* nextMusic = app->GetPlaylist()->GetNextMusic(name);
+		app->SetCurrent(nextMusic);
+	}
+	catch (const exception* ex)
+	{
+		app->SetCurrent(NULL);
+		cout << ex->what() << endl;
+	}
 }
 /**
 	* @brief Method that turn on first music from album from band from playlist
@@ -197,9 +230,11 @@ void TurnOnNextMusic(Application*& app)
 	*/
 void TurnOnAlbumOfBandOnPlaylist(Application*& app, string nameOfBand,string nameOfAlbum)
 {
-	if (!app->GetPlaylist()->GetBand(nameOfBand))
+	Band* wantedBand = app->GetPlaylist()->GetBand(nameOfBand);
+	if (!wantedBand)
 		return;
-	if (!app->GetPlaylist()->GetBand(nameOfBand)->GetAlbum(nameOfAlbum))
+	Album* turnedAlbum = wantedBand->GetAlbum(nameOfAlbum);
+	if (!turnedAlbum)
 		return;
-	app->SetCurrent(app->GetPlaylist()->GetBand(nameOfBand)->GetAlbum(nameOfAlbum)->GetFirstSong());
+	app->SetCurrent(turnedAlbum->GetFirstSong());
 }

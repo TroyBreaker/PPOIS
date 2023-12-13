@@ -10,6 +10,19 @@ TEST(TestCaseName, GraphAddVertex)
 	EXPECT_TRUE(graph.PresenceOfVertex(4));
 }
 
+TEST(TestCaseName, Iterators)
+{
+	Graph<int> graph({ 1, 2, 3 });
+	typename vector<int>::iterator it;
+	it = graph.begin();
+	EXPECT_EQ(1, *it);
+	it++;
+	EXPECT_EQ(2, *it);
+	it = graph.end();
+	it-=2;
+	cout << graph;
+	EXPECT_EQ(2, *it);
+}
 TEST(TestCaseName, GraphAddEdge) {
 	Graph<int> graph({ 1, 2, 3 });
 	graph.AddEdge(1, 3);
@@ -21,16 +34,18 @@ TEST(TestCaseName, GraphRemoveVertexAndEmpty) {
 	graph.AddEdge(1, 2);
 	graph.AddEdge(3, 2);
 	graph.AddEdge(1, 3);
-	graph.RemoveVertex(2);
+	graph.RemoveVertex(1);
+	EXPECT_TRUE(!graph.PresenceOfVertex(1));
 }
 
 TEST(TestCaseName, GraphRemoveEdge) {
 	Graph<int> graph({ 1, 2, 3 });
 	graph.AddEdge(1, 2);
 	graph.AddEdge(3, 2);
-	graph.AddEdge(1, 3);
+	graph.AddEdge(2, 3);
 	Graph<int>gr = graph;
 	graph.RemoveEdge(2, 3);
+	EXPECT_TRUE(!graph.PresenceOfEdge(3,2));
 }
 
 TEST(TestCaseName, GraphClear) {
@@ -56,6 +71,7 @@ TEST(TestCaseName, GraphVertexDegree) {
 	Graph<int> graph({ 1, 2, 3 });
 	graph.AddEdge(1, 2);
 	graph.AddEdge(1, 3);
+	EXPECT_EQ(-1, graph.DegreeOfVertex(8));
 	EXPECT_EQ(2, graph.DegreeOfVertex(1));
 }
 
@@ -63,7 +79,9 @@ TEST(TestCaseName, GraphEdgeDegree) {
 	Graph<int> graph({ 1, 2,3 });
 	graph.AddEdge(1, 2);
 	graph.AddEdge(1, 3);
-	EXPECT_EQ(1, graph.DegreeOfEdge(1, 2));
+	vector<int> arr=graph.DegreeOfEdge(1, 3);
+	EXPECT_EQ(2, arr[0]);
+	EXPECT_EQ(1, arr[1]);
 }
 
 TEST(TestCaseName, GraphEdgeAmount) {
