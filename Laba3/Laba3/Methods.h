@@ -4,7 +4,7 @@
 	* @brief Method that turn on application
 	* @param object of class application
 	*/
-bool AppOn(Application*& app) 
+bool ApplicationOn(Application*& app) 
 {
 	if (app->GetState() == 0) {
 		app->SetState(1);
@@ -17,7 +17,7 @@ bool AppOn(Application*& app)
 	* @brief Method that turn off application
 	* @param object of class application
 	*/
-bool AppOff(Application*& app) 
+bool ApplicationOff(Application*& app) 
 {
 	if (app->GetState() == 1) {
 		app->SetState(0);
@@ -37,7 +37,7 @@ bool IncreaseVolume(Application*& app, int val)
 	if (app->GetSettings()->GetVolume() + val > app->GetSettings()->GetMaxVolume()) {
 		return 0;
 	}
-	app->GetSettings()->IncrVolume(val);
+	app->GetSettings()->IncreaseVolume(val);
 	return 1;
 }
 
@@ -51,7 +51,7 @@ bool ReduceVolume(Application*& app, int val)
 	if (app->GetSettings()->GetVolume() - val < app->GetSettings()->GetMinVolume()) {
 		return 0;
 	}
-	app->GetSettings()->RedVolume(val);
+	app->GetSettings()->ReduceVolume(val);
 	return 1;
 }
 /**
@@ -196,8 +196,8 @@ void TurnOnPodcastOnPlaylist(Application*& app, string name)
 	*/
 void TurnOnNextPodcast(Application*& app)
 {
-	string name = app->GetCurrent()->GetName();
 	try {
+		string name = app->GetCurrent()->GetName();
 		Podcast* nextPodcast = app->GetPlaylist()->GetNextPodcast(name);
 		app->SetCurrent(nextPodcast);
 	}
@@ -213,8 +213,8 @@ void TurnOnNextPodcast(Application*& app)
 	*/
 void TurnOnNextMusic(Application*& app)
 {
-	string name = app->GetCurrent()->GetName();
 	try {
+		string name = app->GetCurrent()->GetName();
 		Music* nextMusic = app->GetPlaylist()->GetNextMusic(name);
 		app->SetCurrent(nextMusic);
 	}
@@ -228,7 +228,7 @@ void TurnOnNextMusic(Application*& app)
 	* @brief Method that turn on first music from album from band from playlist
 	* @param object of class application
 	*/
-void TurnOnAlbumOfBandOnPlaylist(Application*& app, string nameOfBand,string nameOfAlbum)
+void TurnOnAlbumOfBandOnPlaylist(Application*& app, string nameOfBand, string nameOfAlbum)
 {
 	Band* wantedBand = app->GetPlaylist()->GetBand(nameOfBand);
 	if (!wantedBand)

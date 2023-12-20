@@ -7,12 +7,9 @@ class Album {
 	//! songs in album
 	vector<Music*> songs;
 	//! name of album
-	string name;
+	const string name;
 public:
-	Album(string name)
-	{
-		this->name = name;
-	}
+	Album(string name) : name(name) {}
 	void AddMusic(Music* music)
 	{
 		this->songs.push_back(music);

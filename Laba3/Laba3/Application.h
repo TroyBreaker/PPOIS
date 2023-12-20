@@ -37,6 +37,8 @@ public:
 	}
 	Record* GetCurrent() const
 	{
+		if(current==NULL)
+			throw new exception("no current");
 		return current;
 	}
 	Settings* GetSettings() const

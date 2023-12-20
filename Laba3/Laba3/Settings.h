@@ -18,11 +18,11 @@ public:
 	{
 		return minVolume;
 	}
-	void IncrVolume(int val) 
+	void IncreaseVolume(int val) 
 	{
 		volume += val;
 	}
-	void RedVolume(int val) 
+	void ReduceVolume(int val) 
 	{
 		volume -= val;
 	}

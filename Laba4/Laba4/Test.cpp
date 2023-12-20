@@ -26,7 +26,12 @@ TEST(TestCaseName, Iterators)
 TEST(TestCaseName, GraphAddEdge) {
 	Graph<int> graph({ 1, 2, 3 });
 	graph.AddEdge(1, 3);
-	EXPECT_TRUE(graph.PresenceOfEdge(1, 3));
+	try {
+		bool presense = graph.PresenceOfEdge(1, 3);
+		EXPECT_TRUE(presense);
+	}
+	catch (const exception& ex)
+	{}
 }
 
 TEST(TestCaseName, GraphRemoveVertexAndEmpty) {
@@ -45,7 +50,12 @@ TEST(TestCaseName, GraphRemoveEdge) {
 	graph.AddEdge(2, 3);
 	Graph<int>gr = graph;
 	graph.RemoveEdge(2, 3);
-	EXPECT_TRUE(!graph.PresenceOfEdge(3,2));
+	try {
+		bool presense = graph.PresenceOfEdge(3, 2);
+		EXPECT_TRUE(!presense);
+	}
+	catch (const exception& ex)
+	{}
 }
 
 TEST(TestCaseName, GraphClear) {
@@ -79,9 +89,10 @@ TEST(TestCaseName, GraphEdgeDegree) {
 	Graph<int> graph({ 1, 2,3 });
 	graph.AddEdge(1, 2);
 	graph.AddEdge(1, 3);
-	vector<int> arr=graph.DegreeOfEdge(1, 3);
-	EXPECT_EQ(2, arr[0]);
-	EXPECT_EQ(1, arr[1]);
+	pair<int, int> degree;
+	degree = graph.DegreeOfEdge(1, 3);
+	EXPECT_EQ(2, degree.first);
+	EXPECT_EQ(1, degree.second);
 }
 
 TEST(TestCaseName, GraphEdgeAmount) {

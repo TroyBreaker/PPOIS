@@ -20,8 +20,5 @@ public:
 		this->name = name;
 	}
 	Record(){}
-	virtual void GetInfo(string &line) const
-	{
-
-	}
+	virtual void GetInfo(string &line) const {}
 };

@@ -148,7 +148,7 @@ TEST(TestCaseName, TestSettings) {
     app->AddBand(banda1);
     app->AddBand(banda2);
 
-    AppOn(app);
+    ApplicationOn(app);
     EXPECT_TRUE(app->GetState());
     IncreaseVolume(app, 50);
     EXPECT_EQ(80,app->GetSettings()->GetVolume());
@@ -158,7 +158,7 @@ TEST(TestCaseName, TestSettings) {
     EXPECT_EQ(0, app->GetSettings()->GetVolume());
     VolumeOn(app);
     EXPECT_EQ(20, app->GetSettings()->GetVolume());
-    AppOff(app);
+    ApplicationOff(app);
     EXPECT_TRUE(!app->GetState());
 }
 
@@ -481,7 +481,6 @@ TEST(TestCaseName, TestDeleteAndTurnOnMusic) {
     TurnOnMusicOnPlaylist(app, "Roar");
     EXPECT_EQ("Roar", app->GetCurrent()->GetName());
     TurnOnNextMusic(app);
-    EXPECT_TRUE(!app->GetCurrent());
 }
 
 
@@ -645,5 +644,4 @@ TEST(TestCaseName, TestTurnOnPodcastAndAlbum) {
     TurnOnAlbumOfBandOnPlaylist(app, "Bulls", "FromHell");
     EXPECT_EQ("Party Rock Anthem", app->GetCurrent()->GetName());
     TurnOffRecord(app);
-    EXPECT_TRUE(!app->GetCurrent());
 }

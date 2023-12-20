@@ -17,7 +17,7 @@ public:
 	{
 		return name;
 	}
-	void SetAlbums(Album*album)
+	void SetAlbums(Album*album) 
 	{
 		albums.push_back(album);
 	}

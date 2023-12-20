@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <iterator>
+#include <utility>
 using namespace std;
 
 
@@ -11,6 +12,7 @@ namespace NotOrientedGraph {
         typedef vector<T> VertexList;
         typedef vector<vector<T>> AdjacencyList;
         typedef typename VertexList::iterator vertex_iterator;
+        typedef typename VertexList::reverse_iterator vertex_reverse_iterator;
         /**
      * @brief Class constructor
      * @param vector of vertices of any type
@@ -29,12 +31,12 @@ namespace NotOrientedGraph {
         bool operator==(Graph<T> other)
         {
             VertexList other_vertices = other.GetVertexList();
-            return (other_vertices.size() == vertex_list.size()) ? true : false;
+            return (other_vertices.size() == vertex_list.size());
         }
         bool operator>(Graph<T> other)
         {
             VertexList other_vertices = other.GetVertexList();
-            return (vertex_list.size() > other_vertices.size()) ? true : false;
+            return (vertex_list.size() > other_vertices.size());
         }
         bool operator<(Graph<T> other)
         {
@@ -95,20 +97,18 @@ namespace NotOrientedGraph {
     * @param second incident vertex of edge
     * @return degree of edge in graph
     */
-        vector<int> DegreeOfEdge(T first, T second) const {
+        std::pair <int, int> DegreeOfEdge(T first, T second) const {
             try {
-                if (!PresenceOfEdge(first, second)) {
-                    throw std::exception("there is no such edge");
-                }
+                PresenceOfEdge(first, second);
             }
             catch (const exception& ex)
             {
                 cout << ex.what() << endl;
-                return { -1,-1 };
+                return std::make_pair(-1, -1);
             }
             int first_index = DegreeOfVertex(first);
             int second_index = DegreeOfVertex(second);
-            return { first_index ,second_index };
+            return std::make_pair(first_index, second_index);
         }
 
         /**
@@ -160,25 +160,32 @@ namespace NotOrientedGraph {
                 cout << ex->what() << endl;
                 return;
             }
-            for (int AdjacentWithDeleted = 0; AdjacentWithDeleted < adjacency_list[index].size(); AdjacentWithDeleted++) {
+
+            vertex_iterator deleted = this->begin() + index;
+            vertex_iterator AdjacentWithDeleted = adjacency_list[index].begin();
+
+            for (; AdjacentWithDeleted != adjacency_list[index].end(); AdjacentWithDeleted++)
+            {
                 for (int Current = 0; Current < vertex_list.size(); Current++)
                 {
-                    if (Current == index)
-                        continue;
-                    if (vertex_list[Current] == adjacency_list[index][AdjacentWithDeleted])
+                    if (*deleted == vertex_list[Current])continue;
+                    if (*AdjacentWithDeleted == vertex_list[Current])
                     {
-                        for (int AdjacentWithCurrent = 0; AdjacentWithCurrent < adjacency_list[Current].size(); AdjacentWithCurrent++)
+                        vertex_iterator AdjacentWithCurrent = adjacency_list[Current].begin();
+                        for (; AdjacentWithCurrent != adjacency_list[Current].end();)
                         {
-                            if (adjacency_list[Current][AdjacentWithCurrent] == vertex_list[index])
+                            if (*deleted == *AdjacentWithCurrent)
                             {
-                                adjacency_list[Current].erase(adjacency_list[Current].begin() + AdjacentWithCurrent);
+                                AdjacentWithCurrent = adjacency_list[Current].erase(AdjacentWithCurrent);
                             }
+                            else
+                                AdjacentWithCurrent++;
                         }
                     }
                 }
             }
             adjacency_list.erase(adjacency_list.begin() + index);
-            vertex_list.erase(vertex_list.begin() + index);
+            vertex_list.erase(deleted);
         }
         /**
   * @brief Method that remove edge from graph
@@ -187,9 +194,7 @@ namespace NotOrientedGraph {
   */
         void RemoveEdge(T first, T second) {
             try {
-                if (!PresenceOfEdge(first, second)) {
-                    throw std::exception("there is no such edge");
-                }
+                PresenceOfEdge(first, second);
             }
             catch (const exception& ex)
             {
@@ -219,7 +224,7 @@ namespace NotOrientedGraph {
         * @return true if vertex exist, false in other case
         */
         bool PresenceOfVertex(T vertex) {
-            for (vertex_iterator it = this->begin(); it != this->end(); it++)
+            for (typename VertexList::const_iterator it = this->begin(); it != this->end(); it++)          //const
                 if (vertex == *it) {
                     return true;
                 }
@@ -245,13 +250,14 @@ namespace NotOrientedGraph {
             for (int i = 0; i < adjacency_list[first_index].size(); i++) {
                 if (adjacency_list[first_index][i] == second) {
                     isHasEdge = 1;
+                    break;
                 }
             }
             if (isHasEdge) {
                 return true;
             }
             else
-                return false;
+                throw std::exception("there is no such edge");
         }
         /**
         * @brief Method that check if graph is empty
@@ -284,6 +290,8 @@ namespace NotOrientedGraph {
 
         vertex_iterator begin() { return vertex_list.begin(); }
         vertex_iterator end() { return vertex_list.end(); }
+        vertex_reverse_iterator rbegin() { return vertex_list.rbegin(); }
+        vertex_reverse_iterator rend() { return vertex_list.rend(); }
 
     private:
         //! vector of vertices
@@ -298,12 +306,14 @@ namespace NotOrientedGraph {
                     return i;
             throw new exception("invalid vertex");
         }
-       template <typename U> friend
+
+        template <typename U> friend
             ostream& operator<<(ostream& os, const Graph<U>& graph);
     };
+
     template <typename U>
     ostream& operator<<(ostream& os, Graph<U>& graph) {        
-        for (typename vector<U>::iterator it = graph.begin(); it != graph.end(); it++)
+        for (typename vector<U>::reverse_iterator it = graph.rbegin(); it != graph.rend(); it++)     //reverse
             os << *it;
         return os;
     }
