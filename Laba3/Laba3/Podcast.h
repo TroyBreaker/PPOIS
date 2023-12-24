@@ -6,15 +6,12 @@
 class Podcast :public Record
 {
 	//! name of talker
-	string talker;
+	string const talker;
 	//! theme of podcast
-	string theme;
+	string const theme;
 public:
-	Podcast(string talker, string theme, double length, string name) :Record(length, name)
-	{
-		this->talker = talker;
-		this->theme = theme;
-	}
+	Podcast(string talker, string theme, double length, string name) :talker(talker), theme(theme), Record(length, name)
+	{};
 	void GetInfo(string& line) const override
 	{
 		line += (this->GetName() + " ");

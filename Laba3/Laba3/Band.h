@@ -7,12 +7,9 @@ class Band {
 	//! albums of band
 	vector<Album*> albums;
 	//! name of band
-	string name;
+	string const name;
 public:
-	Band(string name) 
-	{
-		this->name = name;
-	}
+	Band(string name) : name(name) {};
 	string GetName()  const
 	{
 		return name;

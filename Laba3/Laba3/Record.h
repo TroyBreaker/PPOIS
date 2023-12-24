@@ -6,19 +6,14 @@ using namespace std;
 */
 class Record {
 	//! length of record
-	double length;
+	double const length;
 	//! name of record
-	string name;
+	string const name;
 public:
 	string GetName() const
 	{
 		return name;
 	}
-	Record(double length,string name)
-	{
-		this->length = length;
-		this->name = name;
-	}
-	Record(){}
+	Record(double length, string name) : length(length), name(name) {};
 	virtual void GetInfo(string &line) const {}
 };

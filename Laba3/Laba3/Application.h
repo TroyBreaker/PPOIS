@@ -7,7 +7,7 @@ using namespace std;
 */
 class Application {
 	//! name of application
-	string name;
+	string const name;
 	
 	//! state of application, 0-turn off, 1-turn on
 	bool state = 0;
@@ -24,9 +24,8 @@ class Application {
 	//! vector of all bands you can listen (all bands you can search)
 	vector<Band*> listOfBands;
 public:
-	Application(string name, Playlist* playlist, Settings* settings)
+	Application(string name, Playlist* playlist, Settings* settings) : name(name) 
 	{
-		this->name = name;
 		this->playlist = playlist;
 		this->settings = settings;
 	}

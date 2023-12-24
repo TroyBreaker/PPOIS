@@ -14,15 +14,28 @@ TEST(TestCaseName, Iterators)
 {
 	Graph<int> graph({ 1, 2, 3 });
 	typename vector<int>::iterator it;
+	graph.AddEdge(2, 3);
+	graph.AddEdge(2, 1);
+	graph.AddEdge(1,3);
 	it = graph.begin();
-	EXPECT_EQ(1, *it);
-	it++;
-	EXPECT_EQ(2, *it);
+	it = graph.next(it);
+	it = graph.RemoveByIterator(it);
+	EXPECT_EQ(3, *it);
+	try {
+		it = graph.previous(it);
+	}
+	catch (const exception& ex)
+	{
+	}
+	it = graph.next(it);
+	EXPECT_EQ(3, *it);
 	it = graph.end();
-	it-=2;
+	it = graph.previous(it);
+	it = graph.previous(it);
 	cout << graph;
-	EXPECT_EQ(2, *it);
+	EXPECT_EQ(1, *it);
 }
+
 TEST(TestCaseName, GraphAddEdge) {
 	Graph<int> graph({ 1, 2, 3 });
 	graph.AddEdge(1, 3);

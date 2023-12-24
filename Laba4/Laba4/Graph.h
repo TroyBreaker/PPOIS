@@ -12,6 +12,7 @@ namespace NotOrientedGraph {
         typedef vector<T> VertexList;
         typedef vector<vector<T>> AdjacencyList;
         typedef typename VertexList::iterator vertex_iterator;
+        typedef typename VertexList::const_iterator vertex_const_iterator;
         typedef typename VertexList::reverse_iterator vertex_reverse_iterator;
         /**
      * @brief Class constructor
@@ -187,6 +188,47 @@ namespace NotOrientedGraph {
             adjacency_list.erase(adjacency_list.begin() + index);
             vertex_list.erase(deleted);
         }
+
+
+        vertex_iterator RemoveByIterator(vertex_iterator deleted)
+        {      
+            int index;
+            try {
+                index = IndexOfVertex(deleted);
+            }
+            catch (const exception* ex) {
+                cout << ex->what() << endl;
+                return deleted;
+            }
+            vertex_iterator AdjacentWithDeleted = adjacency_list[index].begin();
+
+            for (; AdjacentWithDeleted != adjacency_list[index].end(); AdjacentWithDeleted++)
+            {
+                for (int Current = 0; Current < vertex_list.size(); Current++)
+                {
+                    if (*deleted == vertex_list[Current])continue;
+                    if (*AdjacentWithDeleted == vertex_list[Current])
+                    {
+                        vertex_iterator AdjacentWithCurrent = adjacency_list[Current].begin();
+                        for (; AdjacentWithCurrent != adjacency_list[Current].end();)
+                        {
+                            if (*deleted == *AdjacentWithCurrent)
+                            {
+                                AdjacentWithCurrent = adjacency_list[Current].erase(AdjacentWithCurrent);
+                            }
+                            else
+                                AdjacentWithCurrent++;
+                        }
+                    }
+                }
+            }
+            adjacency_list.erase(adjacency_list.begin() + index);
+            vertex_list.erase(deleted);
+            vertex_iterator it = std::next(vertex_list.begin(), index);
+            return it;
+        }
+
+
         /**
   * @brief Method that remove edge from graph
   * @param first incident vertex of edge you want to remove
@@ -290,6 +332,36 @@ namespace NotOrientedGraph {
 
         vertex_iterator begin() { return vertex_list.begin(); }
         vertex_iterator end() { return vertex_list.end(); }
+        vertex_iterator next(vertex_iterator it)
+        {
+            if(it==this->end()-1)
+                throw std::exception("current iterator is the last");
+            return it+1; 
+        }
+        vertex_iterator previous(vertex_iterator it)
+        {
+            if (it == this->begin())
+                throw std::exception("current iterator is the first");
+            return it - 1;
+        }
+
+
+        vertex_const_iterator const_begin() { return vertex_list.begin(); }
+        vertex_const_iterator const_end() { return vertex_list.end(); }
+        vertex_const_iterator const_next(vertex_const_iterator it)
+        {
+            if (it == this->const_end() - 1)
+                throw std::exception("current iterator is the last");
+            return it + 1;
+        }
+        vertex_const_iterator const_previous(vertex_const_iterator it)
+        {
+            if (it == this->const_begin())
+                throw std::exception("current iterator is the first");
+            return it - 1;
+        }
+
+
         vertex_reverse_iterator rbegin() { return vertex_list.rbegin(); }
         vertex_reverse_iterator rend() { return vertex_list.rend(); }
 
@@ -305,6 +377,17 @@ namespace NotOrientedGraph {
                 if (vertex_list[i] == vertex)
                     return i;
             throw new exception("invalid vertex");
+        }
+
+        int IndexOfVertex(vertex_iterator vertex) const
+        {
+            for (int i = 0; i < vertex_list.size(); i++)
+            {
+                auto it = std::next(vertex_list.begin(), i);
+                if (it == vertex)
+                    return i;
+            }
+            throw new exception("invalid iterator");
         }
 
         template <typename U> friend

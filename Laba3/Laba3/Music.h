@@ -7,13 +7,9 @@
 class Music : public Record
 {
 	//! genre of music
-	string genre;
+	string const genre;
 public:
-	Music(string genre, double length, string name) : Record(length, name)
-	{
-		this->genre = genre;
-	}
-	Music(){}
+	Music(string genre, double length, string name) : genre(genre), Record(length, name) {};
 	
 	void GetInfo(string& line) const override
 	{
