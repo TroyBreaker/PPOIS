@@ -47,6 +47,7 @@ TEST(SimpleCount, test2)
 	first.SetNum(41);
 	first.SetDenom(8);
 	third = sec - first;
+	sec - first;
 	a = third.Convert();
 	EXPECT_EQ(a, -337. / 72);
 	third = sec - 5;

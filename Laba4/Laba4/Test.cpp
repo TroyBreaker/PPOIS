@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "Graph.h"
-using namespace NotOrientedGraph;
+//using namespace NotOrientedGraph;
 
 TEST(TestCaseName, GraphAddVertex)
 {
@@ -13,6 +13,45 @@ TEST(TestCaseName, GraphAddVertex)
 TEST(TestCaseName, Iterators)
 {
 	Graph<int> graph({ 1, 2, 3 });
+	graph.AddEdge(2, 3);
+	graph.AddEdge(2, 1);
+	graph.AddEdge(1, 3);
+	//NodeConstIterator<int> iter( graph);
+	//NodeConstIterator<int> iter2(graph);
+	//iter2++;
+	//iter.end();
+	////iter2 = iter.back();
+	EdgeReverseIterator<int> iter(&graph);
+	EdgeReverseIterator<int> iter2(&graph);
+	iter2++;
+	iter2.erase();
+	iter.rend();
+	iter--;
+	iter2 = iter.rback();
+
+	EdgeConstIterator<int> it1(graph);
+	EdgeConstIterator<int> it2(graph);
+	it2.end();
+	it1 = it2.back();
+
+	/*NodeAdjacentConstIterator<int> adj1(graph, iter2);
+	adj1++;
+	adj1.end();
+
+	EdgeAdjacentConstIterator<int> adjEdge(graph, iter2);
+	EdgeAdjacentConstIterator<int> adjEdge2(graph, iter2);
+	adjEdge++;
+	adjEdge--;
+	adjEdge2 = adjEdge.next();*/
+
+	/*NodeIterator<int> itr(&graph);
+	itr.erase();*/
+
+	EdgeIterator<int> edgeitr(&graph);
+	edgeitr.erase();
+
+
+
 	typename vector<int>::iterator it;
 	graph.AddEdge(2, 3);
 	graph.AddEdge(2, 1);

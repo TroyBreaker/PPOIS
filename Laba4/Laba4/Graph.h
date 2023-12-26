@@ -3,9 +3,10 @@
 #include <iterator>
 #include <utility>
 using namespace std;
+template <typename T>
+class NodeAdjacentConstIterator;
 
-
-namespace NotOrientedGraph {
+//namespace NotOrientedGraph {
     template <typename T>
     class Graph {
     public:
@@ -365,12 +366,23 @@ namespace NotOrientedGraph {
         vertex_reverse_iterator rbegin() { return vertex_list.rbegin(); }
         vertex_reverse_iterator rend() { return vertex_list.rend(); }
 
-    private:
-        //! vector of vertices
-        VertexList vertex_list;
-        //! adjacency list is presented ih the form of vector of vectors of vertices
-        AdjacencyList adjacency_list;
-
+        vector<pair<T, T>> GetEdges()
+        {
+            vector<pair<T, T>>AllEdges;
+            for (int i = 0; i < adjacency_list.size(); i++)
+                for (int j = 0; j < adjacency_list[i].size(); j++)
+                {
+                    AllEdges.push_back(make_pair(vertex_list[i], adjacency_list[i][j]));
+                }
+            int a = 0;
+            vector<pair<T, T>> UniqueEdges;
+            for (pair<T, T> pair : AllEdges) {
+                if (!IsDuplicate(pair, UniqueEdges)) {
+                    UniqueEdges.push_back(pair);
+                }
+            }
+            return UniqueEdges;
+        }
         int IndexOfVertex(T vertex) const
         {
             for (int i = 0; i < vertex_list.size(); i++)
@@ -378,6 +390,28 @@ namespace NotOrientedGraph {
                     return i;
             throw new exception("invalid vertex");
         }
+        vector<T>GetAdjacentNodes(T vertex)
+        {
+            int index = IndexOfVertex(vertex);            
+            return adjacency_list[index];
+        }
+        
+        vector<pair<T, T>> GetAdjacentEdges(T vertex)
+        {
+            int index = IndexOfVertex(vertex);
+            vector<pair<T, T>>AllEdges;
+            for (int j = 0; j < adjacency_list[index].size(); j++)
+            {
+                AllEdges.push_back(make_pair(vertex_list[index], adjacency_list[index][j]));
+            }
+            return AllEdges;
+        }
+
+    private:
+        //! vector of vertices
+        VertexList vertex_list;
+        //! adjacency list is presented ih the form of vector of vectors of vertices
+        AdjacencyList adjacency_list;        
 
         int IndexOfVertex(vertex_iterator vertex) const
         {
@@ -390,8 +424,16 @@ namespace NotOrientedGraph {
             throw new exception("invalid iterator");
         }
 
+        bool IsDuplicate(const pair<T, T>& currentPair, const vector<pair<T, T>>& UniqueEdges) {
+            for (pair<T, T> p : UniqueEdges) {
+                if (p.first == currentPair.second && p.second == currentPair.first) {
+                    return true;
+                }
+            }
+            return false;
+        }
         template <typename U> friend
-            ostream& operator<<(ostream& os, const Graph<U>& graph);
+            ostream& operator<<(ostream& os, const Graph<U>& graph);        
     };
 
     template <typename U>
@@ -400,4 +442,570 @@ namespace NotOrientedGraph {
             os << *it;
         return os;
     }
-}
+
+    template <typename T>
+    class NodeConstIterator {
+    private:
+        T current;
+        vector<T> AllNodes;
+        int position = 0;
+        NodeConstIterator()
+        {}
+    public:
+        NodeConstIterator(Graph<T> graph) {
+
+            /*if (!graph.isNode(nodeNum))
+                throw std::out_of_range("no such node");*/
+            AllNodes = graph.GetVertexList();        
+            if (AllNodes.empty())
+            {
+                throw exception("No nodes");
+                position = -1;
+            }
+            else
+            current = AllNodes[0];
+        }       
+
+        void begin() {
+            current = AllNodes[0];
+            position = 0;
+        }
+
+        void end()
+        {
+            current = AllNodes[AllNodes.size()-1];
+            position = AllNodes.size() - 1;
+        }
+
+        NodeConstIterator next() {
+            NodeConstIterator temp;
+            if (position + 1 > AllNodes.size())
+                throw exception("no such node");
+            temp.position=position+1;
+            temp.current = AllNodes[position+1];
+            temp.AllNodes = AllNodes;
+            return temp;
+        }
+
+        NodeConstIterator back() {
+            NodeConstIterator temp;
+            if (position-1 < 0)
+                throw exception("no such node");
+            temp.position = position - 1;
+            temp.current = AllNodes[position - 1];
+            temp.AllNodes = AllNodes;
+            return temp;
+        }
+
+        NodeConstIterator& operator+(int n) {
+            if (position + n > AllNodes.size() - 1)
+                throw exception("no such node");
+            position += n;
+            current = AllNodes[position];
+            return *this;
+        }
+
+        NodeConstIterator& operator-(int n) {
+            if (position - n < 0)
+                throw exception("no such node");
+            position -= n;
+            current = AllNodes[position];
+            return *this;
+        }
+
+        NodeConstIterator & operator++(int n) {
+          *this = this->next();
+            return *this;
+        }        
+
+        NodeConstIterator& operator--(int n) {
+            *this = this->back();
+            return *this;
+
+        }
+
+        T getCurrent() {
+            return current;
+        }
+    };
+
+    template <typename T>
+    class EdgeConstIterator {
+    private:
+        pair<T, T> current;
+        vector<pair<T,T>> AllEdges;
+        int position = 0;
+        EdgeConstIterator()
+        {}
+    public:
+        EdgeConstIterator(Graph<T> graph) {            
+            AllEdges = graph.GetEdges();
+            if (AllEdges.empty())
+            {
+                throw exception("No edges");
+                position = -1;
+            }
+            else
+                current = AllEdges[0];
+        }
+
+        void begin() {
+            current = AllEdges[0];
+            position = 0;
+        }
+
+        void end()
+        {
+            current = AllEdges[AllEdges.size() - 1];
+            position = AllEdges.size() - 1;
+        }
+
+        EdgeConstIterator next() {
+            EdgeConstIterator temp;
+            if (position + 1 > AllEdges.size())
+                throw exception("no such edge");
+            temp.position = position + 1;
+            temp.current = AllEdges[position + 1];
+            temp.AllEdges = AllEdges;
+            return temp;
+        }
+
+        EdgeConstIterator back() {
+            EdgeConstIterator temp;
+            if (position - 1 < 0)
+                throw exception("no such edge");
+            temp.position = position - 1;
+            temp.current = AllEdges[position - 1];
+            temp.AllEdges = AllEdges;
+            return temp;
+        }
+
+        EdgeConstIterator& operator+(int n) {
+            if (position + n > AllEdges.size() - 1)
+                throw exception("no such edge");
+            position += n;
+            current = AllEdges[position];
+            return *this;
+        }
+
+        EdgeConstIterator& operator-(int n) {
+            if (position - n < 0)
+                throw exception("no such edge");
+            position -= n;
+            current = AllEdges[position];
+            return *this;
+        }
+
+        EdgeConstIterator& operator++(int n) {
+            *this = this->next();
+            return *this;
+        }
+
+        EdgeConstIterator& operator--(int n) {
+            *this = this->back();
+            return *this;
+
+        }
+
+         pair<T,T> getCurrent() {
+             return current;
+         }
+    };
+
+    template <typename T>
+    class NodeAdjacentConstIterator {
+    private:
+        T current;
+        vector<T> AdjacentNodes;
+        int position = 0;
+        NodeAdjacentConstIterator()
+        {}
+    public:
+        NodeAdjacentConstIterator(Graph<T> graph, NodeConstIterator<T> vertex_iterator)
+        {
+            AdjacentNodes = graph.GetAdjacentNodes(vertex_iterator.getCurrent());
+            if (AdjacentNodes.empty())
+            {
+                throw exception("No nodes");
+                position = -1;
+            }
+            else
+                current = AdjacentNodes[0];
+        }
+
+        void begin() {
+            current = AdjacentNodes[0];
+            position = 0;
+        }
+
+        void end()
+        {
+            current = AdjacentNodes[AdjacentNodes.size() - 1];
+            position = AdjacentNodes.size() - 1;
+        }
+
+        NodeAdjacentConstIterator next() {
+            NodeAdjacentConstIterator temp;
+            if (position + 1 > AdjacentNodes.size())
+                throw exception("no such node");
+            temp.position = position + 1;
+            temp.current = AdjacentNodes[position + 1];
+            temp.AdjacentNodes = AdjacentNodes;
+            return temp;
+        }
+
+        NodeAdjacentConstIterator back() {
+            NodeAdjacentConstIterator temp;
+            if (position - 1 < 0)
+                throw exception("no such node");
+            temp.position = position - 1;
+            temp.current = AdjacentNodes[position - 1];
+            temp.AdjacentNodes = AdjacentNodes;
+            return temp;
+        }
+
+        NodeAdjacentConstIterator& operator+(int n) {
+            if (position + n > AdjacentNodes.size() - 1)
+                throw exception("no such node");
+            position += n;
+            current = AdjacentNodes[position];
+            return *this;
+        }
+
+        NodeAdjacentConstIterator& operator-(int n) {
+            if (position - n < 0)
+                throw exception("no such node");
+            position -= n;
+            current = AdjacentNodes[position];
+            return *this;
+        }
+
+        NodeAdjacentConstIterator& operator++(int n) {
+            *this = this->next();
+            return *this;
+        }
+
+        NodeAdjacentConstIterator& operator--(int n) {
+            *this = this->back();
+            return *this;
+
+        }
+    };
+    
+    template <typename T>
+    class EdgeAdjacentConstIterator {
+    private:
+        pair<T, T> current;
+        vector<pair<T, T>> AdjacentEdges;
+        int position = 0;
+        EdgeAdjacentConstIterator()
+        {}
+    public:
+        EdgeAdjacentConstIterator(Graph<T> graph, NodeConstIterator<T> vertex_iterator) {
+            AdjacentEdges = graph.GetAdjacentEdges(vertex_iterator.getCurrent());
+            if (AdjacentEdges.empty())
+            {
+                throw exception("No edges");
+                position = -1;
+            }
+            else
+                current = AdjacentEdges[0];
+        }
+
+        void begin() 
+        {
+            current = AdjacentEdges[0];
+            position = 0;
+        }
+
+        void end()
+        {
+            current = AdjacentEdges[AdjacentEdges.size() - 1];
+            position = AdjacentEdges.size() - 1;
+        }
+
+        EdgeAdjacentConstIterator next() {
+            EdgeAdjacentConstIterator temp;
+            if (position + 1 > AdjacentEdges.size())
+                throw exception("no such edge");
+            temp.position = position + 1;
+            temp.current = AdjacentEdges[position + 1];
+            temp.AdjacentEdges = AdjacentEdges;
+            return temp;
+        }
+
+        EdgeAdjacentConstIterator back() {
+            EdgeAdjacentConstIterator temp;
+            if (position - 1 < 0)
+                throw exception("no such edge");
+            temp.position = position - 1;
+            temp.current = AdjacentEdges[position - 1];
+            temp.AdjacentEdges = AdjacentEdges;
+            return temp;
+        }
+
+        EdgeAdjacentConstIterator& operator+(int n) {
+            if (position + n > AdjacentEdges.size() - 1)
+                throw exception("no such edge");
+            position += n;
+            current = AdjacentEdges[position];
+            return *this;
+        }
+
+        EdgeAdjacentConstIterator& operator-(int n) {
+            if (position - n < 0)
+                throw exception("no such edge");
+            position -= n;
+            current = AdjacentEdges[position];
+            return *this;
+        }
+
+        EdgeAdjacentConstIterator& operator++(int n) {
+            *this = this->next();
+            return *this;
+        }
+
+        EdgeAdjacentConstIterator& operator--(int n) {
+            *this = this->back();
+            return *this;
+
+        }
+    };
+
+    template <typename T>
+    class NodeIterator :public NodeConstIterator<T>
+    {
+        Graph<T>* graph;
+    public:
+        NodeIterator(Graph<T>* graph) :graph(graph), NodeConstIterator<T>(*graph)
+        {};
+      void erase()
+        {
+            graph->RemoveVertex(this->getCurrent());
+            NodeIterator<int> itr(graph);
+           *this = itr;
+        }
+    };
+
+    template <typename T>
+    class EdgeIterator :public EdgeConstIterator<T>
+    {
+        Graph<T>* graph;
+    public:
+        EdgeIterator(Graph<T>* graph) :graph(graph), EdgeConstIterator<T>(*graph)
+        {};
+        void erase()
+        {
+            pair<T, T> DeletedPair = this->getCurrent();
+            graph->RemoveEdge(DeletedPair.first, DeletedPair.second);
+            EdgeIterator<int> itr(graph);
+            *this = itr;
+        }
+    };
+
+    template <typename T>
+    class NodeReverseIterator {
+    private:
+        T current;
+        vector<T> AllNodes;
+        int position;
+        Graph<T>* graph;
+        NodeReverseIterator()
+        {}
+    public:
+        NodeReverseIterator(Graph<T>* graph) {
+            this->graph = graph;
+            /*if (!graph.isNode(nodeNum))
+                throw std::out_of_range("no such node");*/
+            AllNodes = graph->GetVertexList();
+            if (AllNodes.empty())
+            {
+                throw exception("No nodes");
+                position = -1;
+            }
+            else {
+                position = AllNodes.size() - 1;
+                    current = AllNodes[AllNodes.size() - 1];
+            }
+        }
+
+        void rend() {
+            current = AllNodes[0];
+            position = 0;
+        }
+
+        void rbegin()
+        {
+            current = AllNodes[AllNodes.size() - 1];
+            position = AllNodes.size() - 1;
+        }
+
+        NodeReverseIterator rback() {
+            NodeReverseIterator temp;
+            if (position + 1 > AllNodes.size())
+                throw exception("no such node");
+            temp.position = position + 1;
+            temp.current = AllNodes[position + 1];
+            temp.AllNodes = AllNodes;
+            temp.graph = graph;
+            return temp;
+        }
+
+        NodeReverseIterator rnext() {
+            NodeReverseIterator temp;
+            if (position - 1 < 0)
+                throw exception("no such node");
+            temp.position = position - 1;
+            temp.current = AllNodes[position - 1];
+            temp.AllNodes = AllNodes;
+            temp.graph = graph;
+            return temp;
+        }
+
+        NodeReverseIterator& operator-(int n) {
+            if (position + n > AllNodes.size() - 1)
+                throw exception("no such node");
+            position += n;
+            current = AllNodes[position];
+            return *this;
+        }
+
+        NodeReverseIterator& operator+(int n) {
+            if (position - n < 0)
+                throw exception("no such node");
+            position -= n;
+            current = AllNodes[position];
+            return *this;
+        }
+
+        NodeReverseIterator& operator--(int n) {
+            *this = this->rback();
+            return *this;
+        }
+
+        NodeReverseIterator& operator++(int n) {
+            *this = this->rnext();
+            return *this;
+        }
+
+        void operator=(const NodeReverseIterator<T>& other) {
+            this->AllNodes = other.AllNodes;
+            this->current = other.current;
+            this->graph = other.graph;
+            this->position = other.position;
+        }
+
+        T getCurrent() {
+            return current;
+        }
+
+        void erase()
+        {
+            graph->RemoveVertex(current);
+            NodeReverseIterator<T> itr(graph);
+            *this = itr;
+        }
+    };
+
+    template <typename T>
+    class EdgeReverseIterator {
+    private:
+        pair<T, T> current;
+        vector<pair<T, T>> AllEdges;
+        int position;
+        Graph<T>* graph;
+        EdgeReverseIterator()
+        {}
+    public:
+        EdgeReverseIterator(Graph<T>* graph) {
+            this->graph = graph;
+            AllEdges = graph->GetEdges();
+            if (AllEdges.empty())
+            {
+                throw exception("No edges");
+                position = -1;
+            }
+            else {               
+                position = AllEdges.size() - 1;
+                current = AllEdges[position];
+            }
+        }
+
+        void rend() {
+            current = AllEdges[0];
+            position = 0;
+        }
+
+        void rbegin()
+        {
+            current = AllEdges[AllEdges.size() - 1];
+            position = AllEdges.size() - 1;
+        }
+
+        EdgeReverseIterator rback() {
+            EdgeReverseIterator temp;
+            if (position + 1 > AllEdges.size())
+                throw exception("no such edge");
+            temp.position = position + 1;
+            temp.current = AllEdges[position + 1];
+            temp.AllEdges = AllEdges;
+            temp.graph = graph;
+            return temp;
+        }
+
+        EdgeReverseIterator rnext() {
+            EdgeReverseIterator temp;
+            if (position - 1 < 0)
+                throw exception("no such edge");
+            temp.position = position - 1;
+            temp.current = AllEdges[position - 1];
+            temp.AllEdges = AllEdges;
+            temp.graph = graph;
+            return temp;
+        }
+
+        EdgeReverseIterator& operator-(int n) {
+            if (position + n > AllEdges.size() - 1)
+                throw exception("no such edge");
+            position += n;
+            current = AllEdges[position];
+            return *this;
+        }
+
+        EdgeReverseIterator& operator+(int n) {
+            if (position - n < 0)
+                throw exception("no such edge");
+            position -= n;
+            current = AllEdges[position];
+            return *this;
+        }
+
+        EdgeReverseIterator& operator--(int n) {
+            *this = this->rback();
+            return *this;
+        }
+
+        EdgeReverseIterator& operator++(int n) {
+            *this = this->rnext();
+            return *this;
+
+        }
+        void operator=(const EdgeReverseIterator<T>& other) {
+            this->AllEdges = other.AllEdges;
+            this->current = other.current;
+            this->graph = other.graph;
+            this->position = other.position;
+        }
+        pair<T, T> getCurrent() {
+            return current;
+        }
+
+        void erase()
+        {
+            graph->RemoveEdge(current.first, current.second);
+            EdgeReverseIterator<T> itr(graph);            
+            *this = itr;
+        }
+    };
+
+//}
