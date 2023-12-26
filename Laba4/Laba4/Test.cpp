@@ -1,6 +1,5 @@
 #include "gtest/gtest.h"
 #include "Graph.h"
-//using namespace NotOrientedGraph;
 
 TEST(TestCaseName, GraphAddVertex)
 {
